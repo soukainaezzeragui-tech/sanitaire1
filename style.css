@@ -1309,3 +1309,25 @@ body {
   background-color: #004494;
   transform: scale(1.05);
 }
+/* 🔧 إصلاح layout في الهاتف */
+@media (max-width:768px){
+
+  .selection-content{
+    grid-template-columns: 1fr;   /* عمود واحد */
+    gap:15px;
+    padding:10px;
+    display:block;
+  }
+
+  /* اجعل المنتجات تأخذ العرض الكامل */
+  .product-container-wrapper{
+    width:100%;
+  }
+
+  /* اخفاء sidebar في الهاتف */
+  .promo-sidebar{
+  order:2;
+  width:100%;
+  }
+
+}
