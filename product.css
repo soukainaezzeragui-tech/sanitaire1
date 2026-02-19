@@ -1,0 +1,14 @@
+.product-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 20px; }
+.main-img { width: 100%; border-radius: 12px; border: 1px solid #eee; }
+.thumbnails { display: flex; gap: 10px; margin-top: 15px; }
+.thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; }
+.thumb:hover { border-color: #007bff; }
+.brand-label { background: #f0f0f0; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color: #555; }
+.extra-info { margin: 20px 0; border-top: 1px solid #eee; padding-top: 20px; }
+.info-item { margin-bottom: 15px; }
+.info-item strong { color: #333; display: block; margin-bottom: 5px; }
+
+/* للهواتف */
+@media (max-width: 768px) {
+    .product-container { grid-template-columns: 1fr; }
+}
