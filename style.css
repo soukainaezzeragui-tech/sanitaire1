@@ -1328,6 +1328,7 @@ body {
   .promo-sidebar{
   order:2;
   width:100%;
+  max-width: 100%;
   }
 
 }
