@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sliderData = [
     {
-      src: "images/mainsalide1.jpg",
+      src: "images/mainsalide1.webp",
       title: "Visitez notre magasin",
       subtitle: "Découvrez des produits de qualité et un service de confiance",
       link: "https://wa.me/212638069899",
@@ -112,3 +112,4 @@ document.addEventListener("DOMContentLoaded", function () {
   mainSlider.addEventListener("mouseenter", stopAutoSlide);
   mainSlider.addEventListener("mouseleave", startAutoSlide);
 });
+
