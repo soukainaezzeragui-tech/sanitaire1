@@ -74,21 +74,30 @@ function displayProducts() {
     const end = start + productsPerPage;
     const paginatedProducts = allProducts.slice(start, end);
 
-    paginatedProducts.forEach((p) => {
-        const detailPage = `product.html?name=${encodeURIComponent(p.name)}`;
-        grid.insertAdjacentHTML("beforeend", `
-            <div class="product-card">
-                <div class="product-img" onclick="location.href='${detailPage}'">
-                    <img src="${p.img}" loading="lazy" onerror="this.src='https://via.placeholder.com/250?text=AlHouda'">
+   paginatedProducts.forEach((p) => {
+    // تجهيز رابط صفحة التفاصيل بشكل آمن
+    const detailPage = `../product.html?name=${encodeURIComponent(p.name)}`;
+    
+    // بناء هيكل الكرت
+    const productHTML = `
+        <div class="product-card">
+            <a href="${detailPage}" class="product-link-wrapper">
+                <div class="product-img">
+                    <img src="${p.img}" alt="${p.name}" loading="lazy" 
+                         onerror="this.src='https://via.placeholder.com/250?text=AlHouda'">
                 </div>
                 <p class="p-category">${p.subCat}</p>
-                <h3 class="p-title" onclick="location.href='${detailPage}'">${p.name}</h3>
-                <button class="p-whatsapp" onclick="commandeProduit('${p.name}')">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </button>
-            </div>
-        `);
-    });
+                <h3 class="p-title">${p.name}</h3>
+            </a>
+            
+<a href="${detailPage}" class="p-detail-btn">
+              Voir plus
+            </a>
+        </div>
+    `;
+    
+    grid.insertAdjacentHTML("beforeend", productHTML);
+});
 
     renderPagination();
 }

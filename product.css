@@ -1,14 +1,87 @@
-.product-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 20px; }
-.main-img { width: 100%; border-radius: 12px; border: 1px solid #eee; }
-.thumbnails { display: flex; gap: 10px; margin-top: 15px; }
-.thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; }
-.thumb:hover { border-color: #007bff; }
-.brand-label { background: #f0f0f0; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color: #555; }
-.extra-info { margin: 20px 0; border-top: 1px solid #eee; padding-top: 20px; }
-.info-item { margin-bottom: 15px; }
-.info-item strong { color: #333; display: block; margin-bottom: 5px; }
+.product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px 0;
+}
 
-/* للهواتف */
-@media (max-width: 768px) {
-    .product-container { grid-template-columns: 1fr; }
+.main-img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+      margin-top: 20px;
+
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+  border: 2px solid #ddd;
+    transition: 0.3s;
+}
+.thumb.active-thumb {
+  border: 2px solid #25D366;
+  transform: scale(1.08);
+}
+.thumb:hover {
+    transform: scale(1.05);
+}
+
+.active-thumb {
+    border-color: #25D366 !important;
+}
+
+.brand-label {
+    background: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.p-title-detail{
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.btn-whatsapp-large {
+    background: #25D366;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+      display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(37,211,102,0.3);
+}
+
+.btn-whatsapp-large:hover {
+    background: #1ebe5d;
+}
+@media (max-width: 768px){
+
+  .product-container{
+    grid-template-columns: 1fr;
+  }
+
+  .product-gallery{
+    position: static;
+  }
+
+  .main-img{
+    max-height: 350px;
+    object-fit: contain;
+  }
+
 }
