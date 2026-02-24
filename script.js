@@ -116,7 +116,7 @@ async function loadCategorizedProducts() {
       Bidet: document.getElementById("Bidet"),
       Meuble: document.getElementById("Meuble"),
       Robinetterie: document.getElementById("Robinetterie"),
-      Mirroir: document.getElementById("Mirroir"),
+      Miroir: document.getElementById("Miroir"),
       Evier: document.getElementById("Evier"),
     };
 
@@ -165,7 +165,7 @@ async function loadCategorizedProducts() {
       if (textToSearch.includes("bidet")) targetSection = "Bidet";
       else if (textToSearch.includes("meuble")) targetSection = "Meuble";
       else if (textToSearch.includes("robinet")) targetSection = "Robinetterie";
-      else if (textToSearch.includes("mirroir")) targetSection = "Mirroir";
+      else if (textToSearch.includes("Miroir")) targetSection = "Miroir";
       else if (textToSearch.includes("evier")) targetSection = "Evier";
 
       // الإضافة للقسم إذا وجد ولم يتجاوز العدد المسموح
