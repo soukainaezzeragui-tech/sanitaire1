@@ -24,6 +24,7 @@ body {
   font-family: "Cairo", sans-serif;
   line-height: 1.6;
   color: #333;
+  background: #ffffff;
 }
 
 .container {
@@ -255,7 +256,7 @@ body {
 
 /* SECTION */
 .categories-section {
-  background: #f4f7f6;
+  background: #ffffff;
   padding: 0px 0;
 }
 .main-slider {
@@ -355,73 +356,73 @@ body {
 }
 /* تنسيق طبقة النصوص */
 .slide-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -40%); /* يبدأ من أسفل قليلاً */
-    text-align: center;
-    width: 80%;
-    opacity: 0;
-    transition: all 0.7s ease-out;
-    z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%); /* يبدأ من أسفل قليلاً */
+  text-align: center;
+  width: 80%;
+  opacity: 0;
+  transition: all 0.7s ease-out;
+  z-index: 2;
 }
 
 /* حالة تفعيل الحركة من JS */
 .slide-overlay.active-animation {
-    opacity: 1;
-    transform: translate(-50%, -50%); /* يعود لمركزه الأصلي */
+  opacity: 1;
+  transform: translate(-50%, -50%); /* يعود لمركزه الأصلي */
 }
 
 .slide-overlay h2 {
-    font-family: 'Cairo', sans-serif;
-    color: #fff;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 4px 10px rgba(0,0,0,0.7);
+  font-family: "Cairo", sans-serif;
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7);
 }
-#imageSubtitle{
-  font-size:16px;
-  color:#f2f2f2;
-  width:100%;
-  text-align:center;
+#imageSubtitle {
+  font-size: 16px;
+  color: #f2f2f2;
+  width: 100%;
+  text-align: center;
 
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* تنسيق الزر */
 .slider-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #e67e22; /* لون برتقالي يناسب مواد البناء */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: 0.3s;
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #e67e22; /* لون برتقالي يناسب مواد البناء */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: 0.3s;
 }
 
 .slider-button:hover {
-    background-color: #d35400;
-    transform: scale(1.05);
+  background-color: #d35400;
+  transform: scale(1.05);
 }
 
 /* جعل الأزرار فوق كل شيء */
 .arrow {
-    z-index: 10;
+  z-index: 10;
 }
 /* أضف هذه الأسطر لتكملة كودك */
-.slide-content h2, 
+.slide-content h2,
 .slide-content .btn-order {
-    opacity: 0; /* ضروري لكي تعمل الـ animation */
-    pointer-events: none;
+  opacity: 0; /* ضروري لكي تعمل الـ animation */
+  pointer-events: none;
 }
 
 .slide.active .btn-order {
-    pointer-events: auto; /* تمكين الضغط على الزر فقط عند ظهوره */
+  pointer-events: auto; /* تمكين الضغط على الزر فقط عند ظهوره */
 }
 @keyframes fadeInUp {
   to {
@@ -429,7 +430,6 @@ body {
     transform: translateY(0);
   }
 }
-
 
 /* ================================
    Explorer nos univers produits
@@ -445,7 +445,7 @@ body {
 ================================ */
 
 .univers-section {
-  background: #fafafa;
+  background: #ffffff;
   padding: 0px 0;
 }
 
@@ -519,7 +519,6 @@ body {
   font-weight: 600;
   color: #292626;
   font-style: normal;
-
 }
 /* قسم اختيار المنتجات */
 .product-selection {
@@ -545,11 +544,11 @@ body {
   color: var(--primary-color);
   border-bottom: 2px solid var(--primary-color);
 }
-.selection-content{
-  display:grid;
-  grid-template-columns:270px 1fr;
-  gap:42px;
-  align-items:start;
+.selection-content {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 42px;
+  align-items: start;
   padding: 20px;
 }
 
@@ -564,15 +563,14 @@ body {
 }
 
 /* 2. تعديل الكارت وإضافة relative وتنسيق الارتفاع */
-.product-card{
-  border:1px solid #eee;
-  box-shadow:none;
+.product-card {
+  border: 1px solid #eee;
+  box-shadow: none;
 }
 
-.product-card:hover{
-  box-shadow:0 8px 18px rgba(0,0,0,0.05);
+.product-card:hover {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
 }
-
 
 /* 3. توحيد حاوية الصورة */
 .product-img-container {
@@ -657,84 +655,80 @@ body {
    PROMO SIDEBAR
 ================================ */
 
-.promo-sidebar{
-  max-width:300px;
-  width:100%;
+.promo-sidebar {
+  max-width: 300px;
+  width: 100%;
 }
 
-.promo-card{
-  position:relative;
-  border-radius:22px;
-  overflow:hidden;
+.promo-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
   height: 360px;
 }
 
-
 /* image */
-.promo-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .5s ease;
+.promo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.promo-card:hover img{
-  transform:scale(1.06);
+.promo-card:hover img {
+  transform: scale(1.06);
 }
 
 /* overlay */
-.promo-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:26px;
-  background:linear-gradient(
+.promo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 26px;
+  background: linear-gradient(
     to top,
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.2),
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.2),
     transparent
   );
 }
 
-
-.promo-overlay h3{
-  color:#fff;
-  font-size:20px;
-  font-weight:600;
-  margin-bottom:14px;
+.promo-overlay h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 
-.promo-btn{
-  background:#fff;
-  color:#111;
-  padding:14px 22px;
-  border-radius:14px;
-  font-size:14px;
-  font-weight:500;
-  box-shadow:0 6px 18px rgba(0,0,0,0.18);
+.promo-btn {
+  background: #fff;
+  color: #111;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
-
-.promo-btn:hover{
-  background:#1f5fae;
-  color:#fff;
+.promo-btn:hover {
+  background: #1f5fae;
+  color: #fff;
 }
-.promo-btn:hover{
-  background:#1f5fae;
-  color:#fff;
+.promo-btn:hover {
+  background: #1f5fae;
+  color: #fff;
 }
-
 
 @media (max-width: 480px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* كارتين في السطر للجوال */
-        gap: 10px; /* تقليل المسافات لتوفير مساحة */
-    }
-    .product-card {
-        padding: 10px; /* تقليل الحشو الداخلي */
-    }
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* كارتين في السطر للجوال */
+    gap: 10px; /* تقليل المسافات لتوفير مساحة */
+  }
+  .product-card {
+    padding: 10px; /* تقليل الحشو الداخلي */
+  }
 }
 
 /* ================================
@@ -1119,7 +1113,7 @@ body {
 }
 
 .mega-column:hover {
-  background-color: #ffffff;
+  background-color: #f5f5f5;
 }
 
 .mega-visual-wrapper {
@@ -1310,26 +1304,26 @@ body {
   transform: scale(1.05);
 }
 /* 🔧 إصلاح layout في الهاتف */
-@media (max-width:768px){
-
-  .selection-content{
-    grid-template-columns: 1fr;   /* عمود واحد */
-    gap:15px;
-    padding:10px;
-    display:block;
+@media (max-width: 768px) {
+  .selection-content {
+    grid-template-columns: 1fr; /* عمود واحد */
+    gap: 15px;
+    padding: 10px;
+    display: block;
   }
 
   /* اجعل المنتجات تأخذ العرض الكامل */
-  .product-container-wrapper{
-    width:100%;
+  .product-container-wrapper {
+    width: 100%;
   }
 
   /* اخفاء sidebar في الهاتف */
-  .promo-sidebar{
-  order:2;
-  width:100%;
-  max-width: 100%;
+  .promo-sidebar {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
   }
-
 }
-
+.seo-text p {
+  color: #ffffff;
+}
