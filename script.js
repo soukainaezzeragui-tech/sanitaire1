@@ -213,12 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMegaMenuMobile();
 });
 /*----------------*/
-let cartCount = 0;
 
-function addToCart() {
-  cartCount++;
-  document.getElementById("cart-count").textContent = cartCount;
-}
 
 function commandeProduit(produit) {
   const phoneNumber = "212638069899"; // ضع رقمك هنا مع رمز الدولة بدون "+"

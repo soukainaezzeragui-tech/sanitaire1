@@ -8,10 +8,6 @@ async function loadCategorizedProducts() {
     const grid = document.getElementById("products");
     grid.innerHTML = `<div class="skeleton-card"></div>`.repeat(4);
 
-    const params = new URLSearchParams(window.location.search);
-    const catFromUrl = params.get("cat")?.toLowerCase().trim();
-    const searchFromUrl = params.get("search")?.toLowerCase().trim();
-
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?output=csv";
 
     try {
@@ -48,11 +44,16 @@ async function loadCategorizedProducts() {
             });
         }
 
-        // الترتيب
         ALL_PRODUCTS.sort((a, b) => a.status - b.status);
 
-        // تفعيل الفلترة بناءً على الرابط (URL)
-        applyFilters(catFromUrl, searchFromUrl);
+        // --- التعديل الجوهري هنا ---
+        const params = new URLSearchParams(window.location.search);
+        selectedCategory = params.get("cat")?.toLowerCase().trim() || null;
+        selectedBrand = params.get("brand")?.toLowerCase().trim() || null;
+        const searchFromUrl = params.get("search")?.toLowerCase().trim() || null;
+
+        // استدعاء الفلترة مرة واحدة فقط مع تمرير البحث إن وجد
+        applyFilters(searchFromUrl);
 
     } catch (e) {
         console.error(e);
@@ -133,24 +134,24 @@ function filterBrand(brandName) {
   selectedBrand = brandName.toLowerCase();
   applyFilters();
 }
-function applyFilters(cat = null, search = null) {
-    // تحديث المتغيرات العامة إذا تم تمرير قيم جديدة
-    if (cat) selectedCategory = cat.toLowerCase();
-    
-    // الفلترة الفعلية للمصفوفة
+function applyFilters(searchQuery = null) {
+    // نستخدم searchFromUrl من الرابط إذا لم يتم تمرير بحث يدوي
+    const params = new URLSearchParams(window.location.search);
+    const search = searchQuery || params.get("search")?.toLowerCase().trim();
+
     allProducts = ALL_PRODUCTS.filter((p) => {
         let catMatch = true;
         let searchMatch = true;
         let brandMatch = true;
 
-        // فلترة القسم
+        // فلترة القسم: نقارن مع selectedCategory العالمي
         if (selectedCategory) {
-            catMatch = p.cat === selectedCategory || p.subCat === selectedCategory;
+            catMatch = (p.cat === selectedCategory || p.subCat === selectedCategory);
         }
 
-        // فلترة البحث (الاسم)
+        // فلترة البحث
         if (search) {
-            searchMatch = p.name.toLowerCase().includes(search.toLowerCase());
+            searchMatch = p.name.toLowerCase().includes(search);
         }
 
         // فلترة الماركة
@@ -163,26 +164,6 @@ function applyFilters(cat = null, search = null) {
 
     currentPage = 1;
     displayProducts();
-}
-function applyFilters() {
-  allProducts = ALL_PRODUCTS.filter((p) => {
-    let catMatch = true;
-    let brandMatch = true;
-
-    if (selectedCategory) {
-      catMatch =
-        p.cat === selectedCategory || p.subCat === selectedCategory;
-    }
-
-    if (selectedBrand) {
-      brandMatch = p.brand && p.brand.toLowerCase() === selectedBrand;
-    }
-
-    return catMatch && brandMatch;
-  });
-
-  currentPage = 1;
-  displayProducts();
 }
 function clearCategoryFilter() {
   selectedCategory = null;
@@ -199,5 +180,4 @@ const searchTerm = urlParams.get('search');
 
 if (searchTerm) {
     console.log("المستخدم يبحث عن: " + searchTerm);
-    // هنا تقوم بتصفية المصفوفة الخاصة بمنتجاتك وعرض النتائج التي تحتوي على searchTerm
 }

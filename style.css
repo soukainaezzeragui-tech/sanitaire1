@@ -50,23 +50,6 @@ body {
 }
 
 /* ================================
-صورة تاع محل
-
-
-   
-================================ */
-/*.hero {
-   
-    min-height: 80vh;
-    height: auto;
-
-
-    background: url("images/store.jpg") center/cover no-repeat;
-
-    position: relative;
-}*/
-
-/* ================================
    NAV PANEL
 ================================ */
 
@@ -1325,5 +1308,9 @@ body {
   }
 }
 .seo-text p {
-  color: #ffffff;
+text-align: center;
+  padding: 5px 0;
+  font-size: 0.85rem; /* تصغير الخط */
+  color: #777; /* لون رمادي خفيف */
+  line-height: 1.6;
 }

@@ -94,7 +94,20 @@ function loadFooter() {
         <p>📞 +212 667 361 575</p>
         <p>✉️ contact@alhouda.com</p>
       </div>
-
+ <div class="footer-col map">
+          <h4><i class="fas fa-map-marked-alt"></i> Notre emplacement</h4>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d373.2162430973931!2d-13.178955940129445!3d27.13579116033025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc377300749d3661%3A0x81a186da3a9345d8!2sSANITAIRE%20AL%20HOUDA%202!5e0!3m2!1sar!2s!4v1771433433259!5m2!1sar!2s"
+              width="100%"
+              height="250"
+              style="border: 0"
+              loading="lazy"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="footer-bottom">

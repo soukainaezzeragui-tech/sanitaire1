@@ -112,4 +112,3 @@ document.addEventListener("DOMContentLoaded", function () {
   mainSlider.addEventListener("mouseenter", stopAutoSlide);
   mainSlider.addEventListener("mouseleave", startAutoSlide);
 });
-
