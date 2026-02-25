@@ -153,7 +153,7 @@ async function loadCategorizedProducts() {
       <p class="p-category">${pSubCat}</p> 
       <h3 class="p-title">${pName}</h3> 
       <div class="product-action">
-         <a href="product-details.html?id=${i}" class="btn-explore">Découvrir</a>
+         <a href="product.html?id=${i}" class="btn-explore">Découvrir</a>
       </div>
     </div> 
   </div>`; // تأكد أن هذا هو الإغلاق الوحيد للكارت
@@ -213,7 +213,32 @@ document.addEventListener("DOMContentLoaded", () => {
   initMegaMenuMobile();
 });
 /*----------------*/
+function doSearch() {
+    const input = document.getElementById("productSearch");
+    const val = input ? input.value.trim() : "";
+    
+    // التوجه لصفحة البحث العامة لضمان رؤية كل النتائج
+    window.location.href = `/products.html?search=${encodeURIComponent(val)}`;
+}
+function executeProductSearch(query) {
+    if (!query) return ALL_PRODUCTS;
 
+    const keywords = query.toLowerCase().split(" ").filter(k => k.length > 0);
+
+    return ALL_PRODUCTS.filter(product => {
+        // نجمع كل البيانات النصية للمنتج في مكان واحد للبحث فيها
+        const searchableText = `
+            ${product.name} 
+            ${product.cat} 
+            ${product.subCat} 
+            ${product.brand || ''}
+        `.toLowerCase();
+
+        // يجب أن يحتوي المنتج على "كل" الكلمات التي كتبها المستخدم (أكثر دقة)
+        // أو يمكنك استخدام .some ليكون البحث أوسع (أقل دقة)
+        return keywords.every(word => searchableText.includes(word));
+    });
+}
 
 function commandeProduit(produit) {
   const phoneNumber = "212638069899"; // ضع رقمك هنا مع رمز الدولة بدون "+"

@@ -1,11 +1,12 @@
-let ALL_PRODUCTS = []; // لتخزين البيانات الأصلية كاملة
-let allProducts = [];   // للمنتجات المعروضة بعد الفلترة
+let ALL_PRODUCTS = []; 
+let allProducts = [];   
 let selectedCategory = null;
 let selectedBrand = null;
 let currentPage = 1;
 const productsPerPage = 50;
 async function loadCategorizedProducts() {
     const grid = document.getElementById("products");
+    if (!grid) return;
     grid.innerHTML = `<div class="skeleton-card"></div>`.repeat(4);
 
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?output=csv";
@@ -21,43 +22,48 @@ async function loadCategorizedProducts() {
             const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
             if (cols.length < 8) continue;
 
-            const name = cols[1]?.replace(/"/g, "").trim();
-            const cat = cols[2]?.replace(/"/g, "").trim().toLowerCase();
-            const subCat = cols[3]?.replace(/"/g, "").trim().toLowerCase();
-            const brand = cols[4]?.replace(/"/g, "").trim(); 
-            let img = cols[6]?.replace(/"/g, "").trim();
-            const status = cols[7]?.replace(/"/g, "").trim();
-
-            if (!status) continue;
-
-            if (img.includes("cloudinary.com")) {
-                img = img.replace("/upload/", "/upload/w_400,q_auto,f_auto/");
-            }
-
             ALL_PRODUCTS.push({
-                name,
-                cat,
-                subCat,
-                brand,
-                img,
-                status: parseInt(status),
+                name: cols[1]?.replace(/"/g, "").trim(),
+                cat: cols[2]?.replace(/"/g, "").trim().toLowerCase(),
+                subCat: cols[3]?.replace(/"/g, "").trim().toLowerCase(),
+                brand: cols[4]?.replace(/"/g, "").trim(), 
+                img: cols[6]?.replace(/"/g, "").trim(),
+                status: parseInt(cols[7]) || 0,
             });
         }
 
         ALL_PRODUCTS.sort((a, b) => a.status - b.status);
 
-        // --- التعديل الجوهري هنا ---
+        // --- منطق تحديد المسار والبحث المستقل ---
         const params = new URLSearchParams(window.location.search);
-        selectedCategory = params.get("cat")?.toLowerCase().trim() || null;
-        selectedBrand = params.get("brand")?.toLowerCase().trim() || null;
         const searchFromUrl = params.get("search")?.toLowerCase().trim() || null;
+        const isSearchPage = window.location.pathname.includes("products.html");
 
-        // استدعاء الفلترة مرة واحدة فقط مع تمرير البحث إن وجد
-        applyFilters(searchFromUrl);
+        // تحديد اسم المجلد الحالي
+        const pathSegments = window.location.pathname.split('/').filter(s => s.length > 0);
+        let folderName = null;
+        if (pathSegments.length > 0 && !pathSegments[pathSegments.length - 1].includes('.html')) {
+            folderName = pathSegments[pathSegments.length - 1];
+        } else if (pathSegments.length > 1) {
+            folderName = pathSegments[pathSegments.length - 2];
+        }
+
+        if (folderName && !isSearchPage) {
+            // نحن في مجلد قسم: نعرض القسم فقط ونتجاهل أي بحث في الرابط
+            selectedCategory = folderName.replace(/-/g, ' '); 
+            applyFilters(null); 
+        } else if (isSearchPage) {
+            // نحن في صفحة البحث العامة: نفعل البحث الشامل
+            selectedCategory = null; 
+            applyFilters(searchFromUrl);
+        } else {
+            // أي حالة أخرى (الصفحة الرئيسية مثلاً)
+            applyFilters(null);
+        }
 
     } catch (e) {
         console.error(e);
-        grid.innerHTML = "<p>خطأ في تحميل البيانات</p>";
+        grid.innerHTML = "<p>Erreur de chargement des données</p>";
     }
 }
 
@@ -144,49 +150,64 @@ function filterBrand(brandName) {
   applyFilters();
 }
 function applyFilters(searchQuery = null) {
-    // نستخدم searchFromUrl من الرابط إذا لم يتم تمرير بحث يدوي
-    const params = new URLSearchParams(window.location.search);
-    const search = searchQuery || params.get("search")?.toLowerCase().trim();
+    const isSearchPage = window.location.pathname.includes("products.html");
 
-    allProducts = ALL_PRODUCTS.filter((p) => {
-        let catMatch = true;
-        let searchMatch = true;
-        let brandMatch = true;
+    if (isSearchPage && searchQuery) {
+        // البحث يعمل فقط في صفحة products.html ويبحث في كل المنتجات
+        allProducts = executeProductSearch(searchQuery, ALL_PRODUCTS);
+    } else {
+        // في صفحات الأقسام: نلتزم بالفلترة حسب المجلد فقط
+        allProducts = ALL_PRODUCTS.filter((p) => {
+            if (!selectedCategory) return true;
+            return (p.cat === selectedCategory || p.subCat === selectedCategory);
+        });
+    }
 
-        // فلترة القسم: نقارن مع selectedCategory العالمي
-        if (selectedCategory) {
-            catMatch = (p.cat === selectedCategory || p.subCat === selectedCategory);
-        }
-
-        // فلترة البحث
-        if (search) {
-            searchMatch = p.name.toLowerCase().includes(search);
-        }
-
-        // فلترة الماركة
-        if (selectedBrand) {
-            brandMatch = p.brand && p.brand.toLowerCase() === selectedBrand;
-        }
-
-        return catMatch && searchMatch && brandMatch;
-    });
+    // فلترة الماركة (تعمل كإضافة)
+    if (selectedBrand) {
+        allProducts = allProducts.filter(p => p.brand && p.brand.toLowerCase() === selectedBrand);
+    }
 
     currentPage = 1;
     displayProducts();
+}
+
+function executeProductSearch(query, dataToSearch) {
+    const keywords = query.toLowerCase().split(/\s+/).filter(k => k.length > 0);
+    return dataToSearch.filter(product => {
+        const searchableText = `${product.name} ${product.cat} ${product.subCat} ${product.brand || ''}`.toLowerCase();
+        return keywords.every(word => searchableText.includes(word));
+    });
 }
 function clearCategoryFilter() {
   selectedCategory = null;
   selectedBrand = null;
   applyFilters();
 }
+function executeProductSearch(query, dataToSearch) {
+    // إذا لم يكن هناك استعلام، نرجع البيانات كما هي
+    if (!query || query.trim() === "") return dataToSearch;
 
+    const keywords = query.toLowerCase().split(/\s+/).filter(k => k.length > 0);
 
-document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
+    return dataToSearch.filter(product => {
+        const searchableText = `
+            ${product.name} 
+            ${product.cat} 
+            ${product.subCat} 
+            ${product.brand || ''}
+        `.toLowerCase();
 
-// كود يوضع في صفحة products.html
-const urlParams = new URLSearchParams(window.location.search);
-const searchTerm = urlParams.get('search');
-
-if (searchTerm) {
-    console.log("المستخدم يبحث عن: " + searchTerm);
+        // يجب أن يجد كل الكلمات المطلوبة
+        return keywords.every(word => searchableText.includes(word));
+    });
 }
+function doSearch() {
+    const input = document.getElementById("productSearch");
+    const val = input ? input.value.trim() : "";
+    if (val) {
+        // توجيه إجباري لصفحة البحث المستقلة
+        window.location.href = `/products.html?search=${encodeURIComponent(val)}`;
+    }
+}
+document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
