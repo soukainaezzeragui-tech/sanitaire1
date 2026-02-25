@@ -1,103 +1,3 @@
-/* ================================
-   SLIDER DATA
-================================ */
-const sliderImages = [
-  {
-    src: "images/cat1.jpg",
-    title: "Salle de bain",
-    desc: "Meubles et accessoires de salle de bain premium",
-  },
-  {
-    src: "images/cat2.jpg",
-    title: "Sanitaire",
-    desc: "Équipements sanitaires modernes et durables",
-  },
-  {
-    src: "images/cat3.jpg",
-    title: "Peinture",
-    desc: "Peintures et revêtements muraux haute qualité",
-  },
-  {
-    src: "images/cat4.jpg",
-    title: "Accessoires",
-    desc: "Accessoires de construction et décoration",
-  },
-  {
-    src: "images/cat5.jpg",
-    title: "Électricité",
-    desc: "Matériel électrique professionnel",
-  },
-  {
-    src: "images/cat6.jpg",
-    title: "Outillage",
-    desc: "Outils professionnels pour tous vos travaux",
-  },
-  {
-    src: "images/cat7.jpg",
-    title: "Plomberie",
-    desc: "Tuyaux, raccords et équipements de plomberie",
-  },
-  {
-    src: "images/cat8.jpg",
-    title: "Construction",
-    desc: "Matériaux de construction de première qualité",
-  },
-  {
-    src: "images/cat9.jpg",
-    title: "Cuisine",
-    desc: "Équipements et accessoires de cuisine modernes",
-  },
-];
-
-let currentIndex = 0;
-let autoSlideInterval;
-
-/* ================================
-   SLIDER FUNCTIONS
-================================ */
-function initSlider() {
-  const indicatorsContainer = document.getElementById("indicators");
-  if (!indicatorsContainer) return;
-
-  indicatorsContainer.innerHTML = "";
-
-  sliderImages.forEach((_, index) => {
-    const indicator = document.createElement("div");
-    indicator.className = `indicator ${index === currentIndex ? "active" : ""}`;
-    indicator.addEventListener("click", () => changeImage(index));
-    indicatorsContainer.appendChild(indicator);
-  });
-
-  changeImage(0);
-  startAutoSlide();
-}
-
-function changeImage(index) {
-  currentIndex = index;
-
-  const mainImage = document.getElementById("mainImage");
-  const slideTitle = document.getElementById("slideTitle");
-  const slideDesc = document.getElementById("slideDesc");
-
-  if (mainImage) {
-    mainImage.src = sliderImages[index].src;
-    mainImage.alt = sliderImages[index].title;
-  }
-  if (slideTitle) slideTitle.textContent = sliderImages[index].title;
-  if (slideDesc) slideDesc.textContent = sliderImages[index].desc;
-
-  document.querySelectorAll(".indicator").forEach((ind, i) => {
-    ind.classList.toggle("active", i === index);
-  });
-}
-
-function startAutoSlide() {
-  clearInterval(autoSlideInterval);
-  autoSlideInterval = setInterval(() => {
-    currentIndex = (currentIndex + 1) % sliderImages.length;
-    changeImage(currentIndex);
-  }, 4000);
-}
 
 /* ================================
    PRODUCTS FROM GOOGLE SHEETS
@@ -153,7 +53,7 @@ async function loadCategorizedProducts() {
       <p class="p-category">${pSubCat}</p> 
       <h3 class="p-title">${pName}</h3> 
       <div class="product-action">
-         <a href="product.html?id=${i}" class="btn-explore">Découvrir</a>
+<a href="product.html?name=${encodeURIComponent(pName)}" class="btn-explore">Découvrir</a>
       </div>
     </div> 
   </div>`; // تأكد أن هذا هو الإغلاق الوحيد للكارت
