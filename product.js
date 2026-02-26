@@ -113,7 +113,7 @@ function renderProductPage(p) {
             </div>
 
             <div class="actions">
-                <a href="https://wa.me/212638069899?text=${encodeURIComponent(
+                <a href="https://wa.me/212667361575?text=${encodeURIComponent(
                     "Je suis intéressé par: " + p.name
                 )}"
                    class="btn-whatsapp-large"
@@ -126,5 +126,6 @@ function renderProductPage(p) {
     </div>
     `;
 }
+
 
 document.addEventListener("DOMContentLoaded", loadProductDetails);
