@@ -141,10 +141,11 @@ function executeProductSearch(query) {
 }
 
 function commandeProduit(produit) {
-  const phoneNumber = "212638069899"; // ضع رقمك هنا مع رمز الدولة بدون "+"
+  const phoneNumber = "212667361575"; // ضع رقمك هنا مع رمز الدولة بدون "+"
   const message = `Bonjour, je souhaite commander le produit: ${produit}`;
   const encodedMessage = encodeURIComponent(message); // ترميز الرسالة لتكون صالحة للروابط
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
   window.open(whatsappURL, "_blank"); // يفتح رابط واتساب في تبويب جديد
 }
+
