@@ -4,49 +4,49 @@ document.addEventListener("DOMContentLoaded", function () {
       src: "images/mainsalide1.webp",
       title: "Visitez notre magasin",
       subtitle: "Découvrez des produits de qualité et un service de confiance",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Cuisines au design moderne",
       subtitle: "Élégance, fonctionnalité et finitions soignées",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Plomberie professionnelle",
       subtitle: "Des solutions fiables pour tous vos projets",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Matériaux de construction de qualité",
       subtitle: "La solidité au service de vos réalisations",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Éclairage et électricité",
       subtitle: "Performance, sécurité et économies d’énergie",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Peintures et décoration",
       subtitle: "Des couleurs qui donnent vie à vos espaces",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Jardin et équipements extérieurs",
       subtitle: "Tout pour entretenir et embellir vos espaces verts",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
     {
       src: "images/mainsalide1.webp",
       title: "Chauffage et ventilation",
       subtitle: "Confort optimal en toute saison",
-      link: "https://wa.me/212638069899",
+      link: "https://wa.me/212667361575",
     },
   ];
 
@@ -112,3 +112,4 @@ document.addEventListener("DOMContentLoaded", function () {
   mainSlider.addEventListener("mouseenter", stopAutoSlide);
   mainSlider.addEventListener("mouseleave", startAutoSlide);
 });
+
