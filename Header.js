@@ -30,7 +30,7 @@ function loadHeader() {
           <nav class="menu">
             <a href="/">Accueil</a>
             <a href="/contact.html">Contact</a>
-            <a href="https://wa.me/212638069899" class="btn-order">WhatsApp</a>
+            <a href="https://wa.me/212667361575" class="btn-order">WhatsApp</a>
           </nav>
         </div>
       </div>
@@ -104,4 +104,5 @@ function loadFooter() {
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
+
 });
