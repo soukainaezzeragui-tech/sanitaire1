@@ -82,22 +82,58 @@ function doSearch() {
 
 function loadFooter() {
   const html = `
-  <footer class="main-footer">
-    <div class="container footer-grid">
-      <div class="footer-col about">
-        <h3>SANITAIRE AL HOUDA <span>II</span></h3>
-        <p>Expert en matériaux de construction و plomberie.</p>
-      </div>
-      <div class="footer-col links">
-        <h4>Liens Rapides</h4>
-        <ul>
-          <li><a href="/">Accueil</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom"><p>© 2026 Sanitaire Al Houda II.</p></div>
-  </footer>`;
+    <footer class="main-footer">
+        <div class="container footer-grid">
+          <div class="footer-col about">
+            <h3>SANITAIRE AL HOUDA <span>II</span></h3>
+            <p>
+              Votre expert de référence en matériaux de construction, plomberie,
+              électricité et peinture. Haute qualité et service fiable depuis
+              des années.
+            </p>
+            <div class="social-icons">
+              <a href="#">FB</a>
+              <a href="#">IG</a>
+              <a href="#">WA</a>
+            </div>
+          </div>
+
+          <div class="footer-col links">
+            <h4>Liens Rapides</h4>
+            <ul>
+              <li><a href="./">Accueil</a></li>
+              <li><a href="contact/">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col contact">
+            <h4>Contact</h4>
+            <p>📍 Avenue Smara, près de la Banque Populaire, Laâyoune, Maroc</p>
+            <p>📞 +212 667 361 575</p>
+            <p>✉️ sanitaire.alhouda.2@gmail.com</p>
+          </div>
+
+          <div class="footer-col map">
+            <h4><i class="fas fa-map-marked-alt"></i> Notre emplacement</h4>
+            <div class="map-container">
+              <iframe
+                title="Localisation SANITAIRE AL HOUDA II à Laâyoune"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d373.2162430973931!2d-13.178955940129445!3d27.13579116033025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc377300749d3661%3A0x81a186da3a9345d8!2sSANITAIRE%20AL%20HOUDA%202!5e0!3m2!1sar!2s!4v1771433433259!5m2!1sar!2s"
+                width="100%"
+                height="250"
+                style="border: 0"
+                loading="lazy"
+              >
+              </iframe>
+            </div>
+          </div>
+        </div>
+        <!-- إغلاق container footer-grid -->
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Sanitaire Al Houda II. Tous droits réservés.</p>
+        </div>
+      </footer>;
   document.getElementById("footer").innerHTML = html;
 }
 
@@ -106,3 +142,4 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFooter();
 
 });
+
