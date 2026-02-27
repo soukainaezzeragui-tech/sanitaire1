@@ -133,7 +133,7 @@ function loadFooter() {
         <div class="footer-bottom">
           <p>&copy; 2026 Sanitaire Al Houda II. Tous droits réservés.</p>
         </div>
-      </footer>;
+      </footer>
   document.getElementById("footer").innerHTML = html;
 }
 
@@ -142,4 +142,5 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFooter();
 
 });
+
 
