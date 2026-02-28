@@ -168,6 +168,9 @@ function doSearch() {
     window.location.href = `/products.html?search=${encodeURIComponent(input.value.trim())}`;
   }
 }
-
+function clearCategoryFilter() {
+  window.location.href = "/salle-de-bain/index.html";
+}
 
 document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
+
