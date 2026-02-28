@@ -28,8 +28,8 @@ function loadHeader() {
           </div>
 
           <nav class="menu">
-            <a href="/">Accueil</a>
-          <a href="../contact/">Contact</a>
+            <a href="../">Accueil</a>
+            <a href="../contact/">Contact</a>
             <a href="https://wa.me/212667361575" class="btn-order">WhatsApp</a>
           </nav>
         </div>
@@ -101,8 +101,8 @@ function loadFooter() {
           <div class="footer-col links">
             <h4>Liens Rapides</h4>
             <ul>
-              <li><a href="./">Accueil</a></li>
-<a href="../contact/">Contact</a>
+<li><a href="/">Accueil</a></li>
+<li><a href="/contact/">Contact</a></li>
             </ul>
           </div>
 
@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFooter();
 
 });
+
 
 
 
