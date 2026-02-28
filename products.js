@@ -51,7 +51,13 @@ async function loadCategorizedProducts() {
     ALL_PRODUCTS.sort((a, b) => a.status - b.status);
     selectedCategory = getCategoryFromPath();
     applyFilters(); 
-
+const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            filterProducts(hash);
+        } else {
+            allProducts = [...ALL_PRODUCTS];
+            displayProducts();
+        }
   } catch (e) {
     console.error("Fetch Error:", e);
     grid.innerHTML = "<p>Erreur de chargement des données</p>";
@@ -162,5 +168,6 @@ function doSearch() {
     window.location.href = `/products.html?search=${encodeURIComponent(input.value.trim())}`;
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
