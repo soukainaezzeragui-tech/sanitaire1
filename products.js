@@ -50,14 +50,13 @@ async function loadCategorizedProducts() {
 
     ALL_PRODUCTS.sort((a, b) => a.status - b.status);
     selectedCategory = getCategoryFromPath();
-    applyFilters(); 
+
 const hash = window.location.hash.replace('#', '');
-        if (hash) {
-            filterProducts(hash);
-        } else {
-            allProducts = [...ALL_PRODUCTS];
-            displayProducts();
-        }
+if (hash) {
+    selectedCategory = hash.toLowerCase();
+}
+
+applyFilters();
   } catch (e) {
     console.error("Fetch Error:", e);
     grid.innerHTML = "<p>Erreur de chargement des données</p>";
@@ -173,4 +172,5 @@ function clearCategoryFilter() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
+
 
