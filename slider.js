@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       link: "https://wa.me/212667361575",
     },
     {
-      src: "images/mainsalide1.webp",
+      src: "images/mainsalide2.webp",
       title: "Plomberie professionnelle",
       subtitle: "Des solutions fiables pour tous vos projets",
       link: "https://wa.me/212667361575",
@@ -112,4 +112,5 @@ document.addEventListener("DOMContentLoaded", function () {
   mainSlider.addEventListener("mouseenter", stopAutoSlide);
   mainSlider.addEventListener("mouseleave", startAutoSlide);
 });
+
 
