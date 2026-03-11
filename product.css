@@ -85,3 +85,101 @@
   }
 
 }
+/* تثبيت معلومات المنتج عند التمرير في الشاشات الكبيرة */
+@media (min-width: 769px) {
+    .product-info {
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+    }
+}
+
+/* تحسين شكل الوصف */
+.p-desc {
+    line-height: 1.8;
+    color: #555;
+    margin: 20px 0;
+}
+
+/* إضافة تأثير عند تمرير الفأرة على الصورة الرئيسية */
+.main-img:hover {
+    cursor: zoom-in;
+    transform: scale(1.02);
+    transition: transform 0.5s ease;
+}
+.product-gallery {
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+#main-view {
+    width: 100%;
+    transition: transform 0.1s ease-out; /* استجابة سريعة للحركة */
+    transform-origin: center center;
+}
+.product-gallery {
+    position: relative;
+    overflow: hidden; /* لمنع خروج الصورة المكبرة عن الإطار */
+    border-radius: 12px;
+}
+
+#main-view {
+    transition: transform 0.5s ease; /* حركة ناعمة */
+    cursor: zoom-in;
+}
+
+.product-gallery:hover #main-view {
+    transform: scale(1.5); /* درجة التكبير (يمكنك تغييرها لـ 2) */
+}
+/* تنسيق العلامة التجارية (Brand) */
+.brand-label {
+    background: #f0f2f5;
+    color: #4b5563;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+/* تنسيق عنوان المنتج */
+.p-title-detail {
+    font-size: 28px;
+    color: #1a202c;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+/* تنسيق الوصف المختصر */
+.p-desc {
+    font-size: 16px;
+    color: #718096;
+    margin-bottom: 25px;
+    border-left: 3px solid #25D366; /* إضافة لمسة جمالية جانبية */
+    padding-left: 15px;
+}
+
+/* تطوير زر الواتساب */
+.btn-whatsapp-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+
+.btn-whatsapp-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(37, 211, 102, 0.3);
+}
