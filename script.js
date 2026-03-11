@@ -13,7 +13,7 @@ async function loadCategorizedProducts() {
 
     // مصفوفة بالأقسام التي نريد تعبئتها
     const sections = {
-      Bidet: document.getElementById("Bidet"),
+      WC: document.getElementById("WC"),
       Meuble: document.getElementById("Meuble"),
       Robinetterie: document.getElementById("Robinetterie"),
       Miroir: document.getElementById("Miroir"),
@@ -62,7 +62,7 @@ async function loadCategorizedProducts() {
       let targetSection = "";
       const textToSearch = (pName + " " + pSubCat).toLowerCase();
 
-      if (textToSearch.includes("bidet")) targetSection = "Bidet";
+      if (textToSearch.includes("wc")) targetSection = "WC";
       else if (textToSearch.includes("meuble")) targetSection = "Meuble";
       else if (textToSearch.includes("robinet")) targetSection = "Robinetterie";
       else if (textToSearch.includes("miroir")) targetSection = "Miroir";
@@ -148,4 +148,5 @@ function commandeProduit(produit) {
 
   window.open(whatsappURL, "_blank"); // يفتح رابط واتساب في تبويب جديد
 }
+
 
