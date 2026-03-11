@@ -1,154 +1,151 @@
-window.updateImg = function (url, el) {
-    const mainView = document.getElementById("main-view");
-    if (!mainView) return;
 
-    mainView.src = url;
+/* ================================
+   PRODUCTS FROM GOOGLE SHEETS
+================================ */
+async function loadCategorizedProducts() {
+  const CSV_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?output=csv";
 
-    document.querySelectorAll(".thumb").forEach((t) => {
-        t.classList.remove("active-thumb");
-    });
+  try {
+    const response = await fetch(CSV_URL);
+    const csvText = await response.text();
+    const rows = csvText.split(/\r?\n/).filter((r) => r.trim());
 
-    el.classList.add("active-thumb");
-};
+    // مصفوفة بالأقسام التي نريد تعبئتها
+    const sections = {
+      WC: document.getElementById("WC"),
+      Meuble: document.getElementById("Meuble"),
+      Robinetterie: document.getElementById("Robinetterie"),
+      Miroir: document.getElementById("Miroir"),
+      Evier: document.getElementById("Evier"),
+    };
 
-async function loadProductDetails() {
-    const params = new URLSearchParams(window.location.search);
-    const productName = params.get("name");
-    const contentDiv = document.getElementById("product-content");
-
-    if (!productName) {
-        contentDiv.innerHTML = "<h2 style='text-align:center;padding:50px;'>Produit non trouvé</h2>";
-        return;
+    // تفريغ المحتوى الحالي ووضع عدادات
+    const counts = {};
+    for (let key in sections) {
+      if (sections[key]) {
+        sections[key].innerHTML = "";
+        counts[key] = 0;
+      }
     }
 
-    const CSV_URL =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?output=csv";
+    const limitPerSection = 4;
 
-    try {
-        const res = await fetch(CSV_URL);
-        if (!res.ok) throw new Error("Network error");
+    for (let i = 1; i < rows.length; i++) {
+      const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+      if (cols.length < 8) continue;
 
-        const csvText = await res.text();
-        const rows = csvText.split(/\r?\n/).filter(Boolean);
+      const pName = cols[1]?.replace(/"/g, "").trim();
+      const pSubCat = cols[3]?.replace(/"/g, "").trim(); // الفئة الفرعية
+      const pImg = cols[6]?.replace(/"/g, "").trim();
+      const pStatus = cols[7]?.replace(/"/g, "").trim();
 
-        const clean = (val) =>
-            val ? val.replace(/^"|"$/g, "").trim() : "";
+      if (pStatus !== "1") continue;
 
-        let product = null;
+      // داخل حلقة التكرار في كود الـ JS الخاص بك، استبدل productHTML بهذا:
+ const productHTML = `
+  <div class="product-card">
+    <div class="product-img-container"> 
+      <img src="${pImg}" alt="${pName}" loading="lazy"> 
+    </div> 
+    
+    <div class="product-info">
+      <p class="p-category">${pSubCat}</p> 
+      <h3 class="p-title">${pName}</h3> 
+      <div class="product-action">
+<a href="product.html?name=${encodeURIComponent(pName)}" class="btn-explore">Découvrir</a>
+      </div>
+    </div> 
+  </div>`; // تأكد أن هذا هو الإغلاق الوحيد للكارت
 
-        for (let i = 1; i < rows.length; i++) {
-            const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-            const nameFromCSV = clean(cols[1]);
+      // تحديد القسم المناسب بناءً على الاسم أو الفئة الفرعية
+      let targetSection = "";
+      const textToSearch = (pName + " " + pSubCat).toLowerCase();
 
-            if (
-                nameFromCSV &&
-                decodeURIComponent(productName).trim().toLowerCase() ===
-                    nameFromCSV.toLowerCase()
-            ) {
-                product = {
-                    name: nameFromCSV,
-                    category: clean(cols[2]),
-                    subCategory: clean(cols[3]),
-                    marque: clean(cols[4]),
-                    description: clean(cols[5]),
-                    img: clean(cols[6]),
-                    desc2: clean(cols[8]),
-                    img2: clean(cols[10]),
-                    img3: clean(cols[11]),
-                };
-                break;
-            }
-        }
+      if (textToSearch.includes("wc")) targetSection = "WC";
+      else if (textToSearch.includes("meuble")) targetSection = "Meuble";
+      else if (textToSearch.includes("robinet")) targetSection = "Robinetterie";
+      else if (textToSearch.includes("miroir")) targetSection = "Miroir";
+      else if (textToSearch.includes("evier")) targetSection = "Evier";
 
-        if (!product) {
-            contentDiv.innerHTML =
-                "<h2 style='text-align:center;padding:50px;'>Produit introuvable</h2>";
-            return;
-        }
-
-        renderProductPage(product);
-
-    } catch (error) {
-        console.error(error);
-        contentDiv.innerHTML =
-            "<h2 style='text-align:center;padding:50px;'>Erreur de chargement</h2>";
+      // الإضافة للقسم إذا وجد ولم يتجاوز العدد المسموح
+      if (targetSection && counts[targetSection] < limitPerSection) {
+        sections[targetSection].insertAdjacentHTML("beforeend", productHTML);
+        counts[targetSection]++;
+      }
     }
-}
-window.updateImg = function (url, el) {
-    const mainView = document.getElementById("main-view");
-    if (!mainView) return;
-
-    mainView.style.transition = "opacity 0.3s ease";
-    mainView.style.opacity = "0.5";
-
-    setTimeout(() => {
-        mainView.src = url;
-        mainView.style.opacity = "1";
-    }, 150);
-
-    document.querySelectorAll(".thumb").forEach((t) => {
-        t.classList.remove("active-thumb");
-    });
-
-    el.classList.add("active-thumb");
-};
-function renderProductPage(p) {
-    const container = document.getElementById("product-content");
-
-    container.innerHTML = `
-    <div class="product-container">
-        <div class="product-gallery" id="zoom-container">
-            <img src="${p.img}" id="main-view" class="main-img" alt="${p.name}">
-            <div class="thumbnails">
-                ${p.img ? `<img src="${p.img}" onclick="updateImg('${p.img}', this)" class="thumb active-thumb">` : ""}
-                ${p.img2 ? `<img src="${p.img2}" onclick="updateImg('${p.img2}', this)" class="thumb">` : ""}
-                ${p.img3 ? `<img src="${p.img3}" onclick="updateImg('${p.img3}', this)" class="thumb">` : ""}
-            </div>
-        </div>
-        <div class="product-info">
-            <span class="brand-label">${p.marque || "Original"}</span>
-            <h1 class="p-title-detail">${p.name}</h1>
-            <p class="p-desc">${p.description || ""}</p>
-            <div class="actions">
-                <a href="https://wa.me/212667361575?text=${encodeURIComponent("Je suis intéressé par: " + p.name)}"
-                   class="btn-whatsapp-large" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Commander via WhatsApp
-                </a>
-            </div>
-            <div class="info-item">
-    <i class="fas fa-tags" style="color: #25D366; margin-right: 8px;"></i>
-    <strong>Catégorie:</strong>
-    <span>${p.category || ""} / ${p.subCategory || ""}</span>
-</div>
-        </div>
-    </div>
-    `;
-
-    // تفعيل الزوم بعد إضافة العناصر للـ DOM
-    initZoom();
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
 }
 
-function initZoom() {
-    const gallery = document.getElementById('zoom-container');
-    const mainImg = document.getElementById('main-view');
+document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
+// تشغيل الدالة عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
+loadCategorizedProducts();
 
-    if (!gallery || !mainImg) return;
+function commandeProduit(produit) {
+  alert(
+    `Vous avez demandé : ${produit}\nNous vous contacterons bientôt pour confirmer la commande.`,
+  );
+}
 
-    gallery.addEventListener('mousemove', (e) => {
-        // حساب موقع الفأرة بالنسبة للحاوية
-        const rect = gallery.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        mainImg.style.transformOrigin = `${x}px ${y}px`;
-        mainImg.style.transform = "scale(1.5)"; // درجة التكبير
+/* ================================
+   MEGA MENU MOBILE
+================================ */
+function initMegaMenuMobile() {
+  document.querySelectorAll(".has-mega > a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      if (window.innerWidth <= 992) {
+        e.preventDefault();
+        link.parentElement.classList.toggle("active");
+      }
     });
+  });
+}
 
-    gallery.addEventListener('mouseleave', () => {
-        mainImg.style.transform = "scale(1)";
-        mainImg.style.transformOrigin = "center center";
+/* ================================
+   INIT
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  initSlider();
+  loadCategorizedProducts();
+  initMegaMenuMobile();
+});
+/*----------------*/
+function doSearch() {
+    const input = document.getElementById("productSearch");
+    const val = input ? input.value.trim() : "";
+    
+    // التوجه لصفحة البحث العامة لضمان رؤية كل النتائج
+    window.location.href = `/products.html?search=${encodeURIComponent(val)}`;
+}
+function executeProductSearch(query) {
+    if (!query) return ALL_PRODUCTS;
+
+    const keywords = query.toLowerCase().split(" ").filter(k => k.length > 0);
+
+    return ALL_PRODUCTS.filter(product => {
+        // نجمع كل البيانات النصية للمنتج في مكان واحد للبحث فيها
+        const searchableText = `
+            ${product.name} 
+            ${product.cat} 
+            ${product.subCat} 
+            ${product.brand || ''}
+        `.toLowerCase();
+
+        // يجب أن يحتوي المنتج على "كل" الكلمات التي كتبها المستخدم (أكثر دقة)
+        // أو يمكنك استخدام .some ليكون البحث أوسع (أقل دقة)
+        return keywords.every(word => searchableText.includes(word));
     });
 }
 
+function commandeProduit(produit) {
+  const phoneNumber = "212667361575"; // ضع رقمك هنا مع رمز الدولة بدون "+"
+  const message = `Bonjour, je souhaite commander le produit: ${produit}`;
+  const encodedMessage = encodeURIComponent(message); // ترميز الرسالة لتكون صالحة للروابط
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-document.addEventListener("DOMContentLoaded", loadProductDetails);
+  window.open(whatsappURL, "_blank"); // يفتح رابط واتساب في تبويب جديد
+}
+
