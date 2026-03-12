@@ -34,7 +34,7 @@ async function loadSearchProducts() {
         container.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #666;">
                 <i class="fas fa-search" style="font-size: 48px; opacity: 0.5; margin-bottom: 15px;"></i>
-                <p style="font-size: 18px;">يرجى كتابة اسم المنتج أو الماركة في شريط البحث أعلاه</p>
+                <p style="font-size: 18px;">Veuillez entrer le nom du produit ou de la marque dans la barre de recherche ci-dessus.</p>
             </div>`;
         return;
     }
@@ -44,7 +44,7 @@ async function loadSearchProducts() {
     spinnerDiv.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 60px;';
     spinnerDiv.innerHTML = `
         <div class="spinner" style="width: 50px; height: 50px; border: 3px solid #f3f3f3; border-top: 3px solid #25D366; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px;"></div>
-        <p style="color: #666;">جاري البحث عن المنتجات...</p>
+        <p style="color: #666;">Recherche des produits... </p>
     `;
     
     container.innerHTML = "";
@@ -59,7 +59,7 @@ async function loadSearchProducts() {
 
     try {
         const response = await fetch(CONFIG.CSV_URL);
-        if (!response.ok) throw new Error('فشل في تحميل البيانات');
+        if (!response.ok) throw new Error('Impossible de charger les données.');
         
         const csvText = await response.text();
         const rows = csvText.split(/\r?\n/).filter(row => row.trim());
@@ -151,8 +151,8 @@ async function loadSearchProducts() {
             container.innerHTML = `
                 <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
                     <i class="fas fa-box-open" style="font-size: 48px; opacity: 0.5; margin-bottom: 15px; color: #999;"></i>
-                    <p style="font-size: 18px; color: #666; margin-bottom: 10px;">لا توجد نتائج لـ "${searchQuery}"</p>
-                    <p style="color: #999; font-size: 14px;">جرب كلمات بحث أخرى مثل: اسم المنتج أو الماركة</p>
+                    <p style="font-size: 18px; color: #666; margin-bottom: 10px;">Aucun résultat pour "${searchQuery}"</p>
+                    <p style="color: #999; font-size: 14px;">Essayez d’autres mots-clés, comme le nom du produit ou la marque.</p>
                 </div>`;
             return;
         }
@@ -182,11 +182,11 @@ async function loadSearchProducts() {
         infoDiv.innerHTML = `
             <div style="color: #666; font-size: 14px;">
                 <i class="fas fa-box" style="margin-left: 5px;"></i>
-                إجمالي النتائج: ${totalProducts} منتج
-                ${totalPages > 1 ? `(صفحة ${currentPage} من ${totalPages})` : ''}
+               Total des résultats: ${totalProducts} produit
+                ${totalPages > 1 ? `(Page ${currentPage} sur ${totalPages})` : ''}
             </div>
             <div style="color: #666; font-size: 14px;">
-                عرض ${startIndex + 1} - ${endIndex} من ${totalProducts}
+                Affichage de ${startIndex + 1} - ${endIndex} sur ${totalProducts}
             </div>
         `;
         container.appendChild(infoDiv);
@@ -296,17 +296,18 @@ function createProductCard(product) {
                 <div class="product-action">
                     <a href="/product.html?name=${encodeURIComponent(product.pName)}" 
                        class="btn-explore" 
-                       title="عرض التفاصيل">
-                        اكتشف
+                       title="Voir les détails">
+                        Découvrir
                     </a>
                     <button onclick="commandeProduit('${product.pName.replace(/'/g, "\\'")}')" 
                             class="btn-whatsapp-small"
-                            title="طلب عبر الواتساب">
+                            title="Commander via WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </button>
                 </div>
             </div> 
         </div>`;
 }
+
 
 document.addEventListener("DOMContentLoaded", loadSearchProducts);
