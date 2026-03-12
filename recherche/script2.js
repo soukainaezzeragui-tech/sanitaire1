@@ -1,7 +1,6 @@
 async function loadSearchProducts() {
     const CONFIG = {
         CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?output=csv",
-        ACTIVE_STATUS: ["1", "2", "3", "4"],
         HIDDEN_STATUS: "9",
         MIN_COLUMNS: 12,
         PRODUCTS_PER_PAGE: 50,
@@ -89,9 +88,6 @@ async function loadSearchProducts() {
             const pStatus = clean(cols[CONFIG.COLUMNS.STATUS]);
             
             if (pStatus === CONFIG.HIDDEN_STATUS) continue;
-            
-            const isActive = CONFIG.ACTIVE_STATUS.includes(pStatus);
-            if (!isActive) continue;
 
             const pName = clean(cols[CONFIG.COLUMNS.NAME]);
             if (pName === "") continue;
@@ -311,3 +307,4 @@ function createProductCard(product) {
 
 
 document.addEventListener("DOMContentLoaded", loadSearchProducts);
+
