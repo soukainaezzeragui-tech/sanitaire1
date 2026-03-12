@@ -22,11 +22,12 @@ function loadHeader() {
             <p>Matériaux de construction • Plomberie • Électricité • Peinture</p>
           </div>
 
-          <div class="search-box">
-            <input id="productSearch" type="text" placeholder="Rechercher..." />
-            <button onclick="doSearch()">🔍</button>
-          </div>
-
+ <div class="search-box">
+    <form action="/recherche/" method="GET" class="search-form">
+        <input type="text" name="q" placeholder="Rechercher des produits..." required>
+    <button aria-label="Rechercher">🔍</button>
+    </form>
+</div>
           <nav class="menu">
             <a href="../">Accueil</a>
             <a href="../contact/">Contact</a>
@@ -142,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFooter();
 
 });
+
 
 
 
