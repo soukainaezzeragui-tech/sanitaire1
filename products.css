@@ -87,6 +87,31 @@ body {
   font-weight: bold;
   color: #007bff;
 }
+/* مسار التنقل (Breadcrumb) */
+.breadcrumb {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.breadcrumb a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb i {
+  margin: 0 10px;
+  color: #999;
+  font-size: 12px;
+}
+
+.breadcrumb .current {
+  color: var(--gray-medium);
+}
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -793,4 +818,39 @@ animation: skeleton-loading 1.5s infinite;
         padding: 8px 5px;
         width: 100%;
     }
+
+}
+/* =============================================
+ وصف الفئة (Category Description)
+   ============================================= */
+.category-description {
+  background: #f8f9fa;
+  padding: 50px;
+  border-radius: 30px;
+}
+
+.category-description h2 {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 2rem;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.category-description h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+.category-description p {
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
 }
