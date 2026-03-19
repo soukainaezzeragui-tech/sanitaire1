@@ -109,6 +109,7 @@ function renderProductPage(p) {
             <span class="brand-label">${p.marque || "Original"}</span>
             <h1 class="p-title-detail">${p.name}</h1>
             <p class="p-desc">${p.description || ""}</p>
+            <p class="p-desc">${p.desc2 || ""}</p>
             <div class="actions">
                 <a href="https://wa.me/212667361575?text=${encodeURIComponent("Je suis intéressé par: " + p.name)}"
                    class="btn-whatsapp-large" target="_blank">
