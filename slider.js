@@ -6,16 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
       subtitle: "Découvrez des produits de qualité et un service de confiance",
       link: "https://wa.me/212667361575",
     },
-    {
-      src: "images/mainsalide1.webp",
-      title: "Cuisines au design moderne",
-      subtitle: "Élégance, fonctionnalité et finitions soignées",
-      link: "https://wa.me/212667361575",
-    },
-    {
-      src: "images/mainsalide2.webp",
-      title: "Plomberie professionnelle",
-      subtitle: "Des solutions fiables pour tous vos projets",
+  {
+  src: "images/outilage.webp",
+  title: "Meilleures Outils pour Tous vos Projets",
+  subtitle: "Qualité, Durabilité et Performance Professionnelle",
+  link: "https://wa.me/212667361575",
+},
+  {
+      src: "images/electrisite .webp",
+      title: "Éclairage et électricité",
+      subtitle: "Performance, sécurité et économies d’énergie",
       link: "https://wa.me/212667361575",
     },
     {
