@@ -38,19 +38,19 @@ function loadHeader() {
     </div>
   </header>
 
-  <section class="univers-section">
+ <section class="univers-section">
     <div class="container">
       <div class="univers-grid">
         ${createCategory("Salle de bain", "univers-bath.webp", "salle-de-bain")}
-        ${createCategory("Traitement des eaux", "univers-water.webp", "traitement-eaux")}
+        ${createCategory("Pompe & Traitement des eaux", "univers-water.webp", "pompe-traitement-eaux")}
+        ${createCategory("Électricité & Éclairage", "univers-electricity.webp", "electricite-eclairage")}
         ${createCategory("Plomberie", "plombiere.webp", "plomberie")}
-        ${createCategory("Electricité", "univers-electricity.webp", "electricite")}
-        ${createCategory("Pompes", "univers-pump.webp", "pompes")}
-        ${createCategory("Jardinage", "univers-garden.webp", "jardinage")}
-        ${createCategory("Bricolage", "bricolage.webp", "bricolage")}
-        ${createCategory("Cuisine", "univers-kitchen.webp", "cuisine", "Cuisine / dressing")}
-        ${createCategory("Climatisation", "univers-clim.webp", "climatisation")}
-        ${createCategory("Chaufe-eau", "univers-heating.webp", "chauffe-eau")}
+        ${createCategory("Menuiserie & Sécurité", "117750.jpg", "Menuiserie-Sécurité")}
+        ${createCategory("Jardinage & Extérieur", "univers-garden.webp", "jardinage-exterieur")}
+        ${createCategory("Outillage & Bricolage", "bricolage.webp", "bricolage-outillage")}
+        ${createCategory("Cuisine & dressing", "univers-kitchen.webp", "cuisine", "Cuisine & dressing")}
+        ${createCategory("Climatisation & Chauffage", "univers-clim.webp", "climatisation-chauffage")}
+        ${createCategory("Peinture & Décoration", "univers-peinture.webp", "peinture-decoration")}
       </div>
     </div>
   </section>
