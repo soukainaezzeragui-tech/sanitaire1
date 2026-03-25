@@ -16,19 +16,19 @@ document.addEventListener("DOMContentLoaded", function () {
       src: "images/ms-outilage.webp",
       title: "Outillage professionnel",
       subtitle: "Des outils fiables pour tous vos projets",
-      link: "/bricolage",
+      link: "/bricolage-outillage",
     },
     {
       src: "images/ms-doorphone.webp",
       title: "Interphones & sécurité",
       subtitle: "Contrôle d’accès moderne et protection optimale",
-      link: "https://wa.me/212667361575",
+      link: "/Menuiserie-Sécurité",
     },
     {
       src: "images/ms-electrisite.webp",
       title: "Électricité & éclairage",
       subtitle: "Solutions performantes pour vos installations",
-      link: "/electricite",
+      link: "/electricite-eclairage",
     },
 
   ];
