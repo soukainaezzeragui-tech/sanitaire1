@@ -1,0 +1,408 @@
+/* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+:root {
+    --primary-color: #0056b3; 
+    --accent-color: #ffc107;  
+    --dark-bg: #333;
+    --white: #ffffff;
+}
+
+body {
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.top-bar {
+    background: var(--primary-color);
+    color: rgb(255, 255, 255);
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+.nav-panel {
+    background: rgba(255, 255, 255, 0.85); /* زيادة الوضوح */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    padding: 15px 20px;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px; /* توزيع المسافات */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+
+}
+.logo h1 {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: var(--accent-color);
+}
+
+.logo p {
+    font-size: 12px;
+    color: #666;
+}
+
+/* مربع البحث */
+.search-box {
+    display: flex;
+    flex: 1;
+    margin: 0 20px;
+    max-width: 400px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.search-box button {
+    padding: 10px 15px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+/* القائمة */
+.menu a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.menu a:hover, .menu a.active {
+    color: var(--primary-color);
+}
+
+.btn-order {
+    background: var(--accent-color);
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: #000 !important;
+}
+
+.btn-order:hover {
+    background: #e6af06;
+}
+
+/* محتوى وسط الصفحة */
+.hero-content {
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
+
+.hero-content h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* تحسين للهواتف */
+@media (max-width: 768px) {
+    .nav-panel {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .search-box {
+        margin: 10px 0;
+    }
+    .hero-content h2 {
+        font-size: 28px;
+    }
+}
+/* 1. تحسين انسيابية الصفحة */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. تأثير ظهور تدريجي للمحتوى (Fade In) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fadeInUp 1s ease-out; /* تطبيق التأثير على نص الوسط */
+}
+
+/* 3. تحسين التفاعل مع الروابط */
+.menu a {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: 0.3s;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+/* 4. تعديل بسيط على زر الطلب ليبرز أكثر */
+.btn-order {
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    font-weight: bold;
+    border: 2px solid transparent;
+}
+
+.btn-order:hover {
+    background: transparent !important;
+    border-color: var(--accent-color);
+    color: var(--accent-color) !important;
+}
+
+/* 5. تحسين عرض البحث في الهواتف */
+@media (max-width: 768px) {
+    .nav-panel {
+        width: 95%;
+        margin: 10px auto;
+    }
+    
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .menu a {
+        margin: 0 5px;
+        font-size: 14px;
+    }
+}
+/* تنسيق الـ Footer */
+.main-footer {
+    background: #1a1a1a; /* لون داكن فخم */
+    color: #e0e0e0;
+    padding: 60px 0 20px;
+    margin-top: 50px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* توزيع تلقائي للأعمدة */
+    gap: 40px;
+}
+
+.footer-col h3 {
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.footer-col h3 span {
+    color: var(--accent-color);
+}
+
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-col p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* تنسيق الروابط */
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #bbb;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+/* تنسيق الخريطة */
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #333;
+}
+
+/* أيقونات التواصل الاجتماعي */
+.social-icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: #333;
+    color: white;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* شريط الحقوق */
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    font-size: 13px;
+    color: #777;
+}
+
+/* تحسين للهواتف */
+@media (max-width: 768px) {
+    .footer-grid {
+        text-align: center;
+    }
+    .footer-col h4 {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 20px;
+    }
+}
+/* إعدادات القسم الرئيسي للأصناف */
+/* الحاوية الكبرى للقسم */
+.categories-section {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+/* الحاوية الداخلية لتحديد العرض والتوسط */
+.categories-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; /* حماية للجوانب في الشاشات الصغيرة */
+}
+
+/* شبكة العناصر */
+.categories-grid {
+    display: grid;
+    /* auto-fit تجعل العناصر تتوزع تلقائياً حسب المساحة المتاحة */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+    gap: 20px;
+}
+
+/* العنصر الواحد داخل الشبكة */
+.cat-item {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+
+.cat-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.cat-item span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+}
+
+/* تأثيرات الـ Hover */
+.cat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.cat-item:hover img {
+    transform: scale(1.1);
+}

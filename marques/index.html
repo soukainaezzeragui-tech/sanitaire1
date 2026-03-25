@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Title & Meta SEO dynamiques -->
+  <title id="dynamic-title">Produits de la marque</title>
+  <meta id="meta-description" name="description" content="Produits de la marque" />
+  <meta id="meta-keywords" name="keywords" content="marque sanitaire" />
+  <link id="canonical-link" rel="canonical" href="" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../products.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Breadcrumb -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/"><i class="fas fa-home"></i> Accueil</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current" id="breadcrumb-marque">Marque</span>
+    </div>
+  </div>
+
+  <!-- H1 et description dynamique -->
+  <section class="category-header">
+    <div class="container">
+      <h1 id="marque-title">Produits de la marque</h1>
+      <p id="marque-description">
+        Découvrez tous les produits de cette marque disponibles chez SANITAIRE AL HOUDA II.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section produits -->
+  <section class="products-section">
+    <div class="container">
+      <div id="products" class="product-grid"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="../Header.js"></script>
+<script src="./marque-products.js"></script>
+  <!-- Script SEO dynamique & récupération marque -->
+  <script>
+    // Récupère la marque depuis ?marque=baldini ou /marques/baldini/
+
+    const marqueName = slug
+      ? slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
+      : "Marque";
+
+    // Mise à jour titres et SEO
+    document.getElementById("marque-title").textContent = `Produits ${marqueName} à Laâyoune`;
+    document.getElementById("marque-description").textContent =
+      `Découvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA II.`;
+    document.getElementById("breadcrumb-marque").textContent = marqueName;
+    document.title = `${marqueName} à Laâyoune | SANITAIRE AL HOUDA II`;
+    document.getElementById("meta-description").setAttribute(
+      "content",
+      `Produits ${marqueName} à Laâyoune : qualité professionnelle, prix compétitifs.`
+    );
+    document.getElementById("meta-keywords").setAttribute(
+      "content",
+      `${marqueName}, sanitaire ${marqueName}, robinetterie ${marqueName}`
+    );
+    document.getElementById("canonical-link").setAttribute("href", window.location.href);
+
+    // Redirection vers ?marque= si URL clean mais sans paramètre
+    if (window.location.pathname.includes("/marques/") && !window.location.search) {
+      const parts = window.location.pathname.split("/");
+      const slugFromPath = parts[parts.length - 2];
+      if (slugFromPath && slugFromPath !== "marques") {
+        window.location.href = `/marques/?marque=${slugFromPath}`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - SANITAIRE AL HOUDA II</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #1a1a1a; /* أسود عميق للفخامة */
+      --accent-color: #c5a059;  /* ذهبي خافت أو نحاسي للمسة راقية */
+      --bg-color: #fcfcfc;
+      --text-muted: #666;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      color: var(--primary-color);
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .contact-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -1px;
+    }
+
+    .contact-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    /* قسم المعلومات */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .info-group {
+      border-left: 2px solid #eee;
+      padding-left: 20px;
+      transition: border-color 0.3s ease;
+    }
+
+    .info-group:hover {
+      border-left-color: var(--accent-color);
+    }
+
+    .info-group h4 {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .info-group p, .info-group a {
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--primary-color);
+      display: block;
+      margin: 0;
+    }
+
+    /* قسم الخريطة */
+    .map-wrapper {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+      height: 550px;
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(0.2) contrast(1.1); /* لمسة سينمائية للخريطة */
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-container {
+        margin: 40px auto;
+      }
+      .map-wrapper {
+        height: 400px;
+        order: -1; /* الخريطة تظهر أولاً في الجوال */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <main class="contact-container">
+    <header class="contact-header">
+      <h1>Contactez-nous</h1>
+      <p>Nous sommes à votre écoute.</p>
+    </header>
+
+    <div class="contact-grid">
+      <aside class="info-list">
+        <div class="info-group">
+          <h4>Localisation</h4>
+          <p>Avenue Smara, près de la Banque Populaire,<br>Laâyoune, Maroc</p>
+        </div>
+
+        <div class="info-group">
+          <h4>Téléphone</h4>
+          <a href="tel:+2126673615750">+212 667 361 5750</a>
+        </div>
+
+        <div class="info-group">
+          <h4>Email</h4>
+          <a href="mailto:sanitaire.alhouda.2@gmail.com">sanitaire.alhouda.2@gmail.com</a>
+        </div>
+
+        <div class="info-group">
+          <h4>Horaires</h4>
+          <p>Lundi – Samedi : 08:00 – 20:00</p>
+        </div>
+      </aside>
+
+      <section class="map-wrapper">
+        <iframe
+   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d373.2162430973931!2d-13.178955940129445!3d27.13579116033025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc377300749d3661%3A0x81a186da3a9345d8!2sSANITAIRE%20AL%20HOUDA%202!5e0!3m2!1sar!2s!4v1771433433259!5m2!1sar!2s"          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+  <script src="../Header.js"></script>
+</body>
+</html>

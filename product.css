@@ -1,0 +1,185 @@
+.product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.main-img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+      margin-top: 20px;
+
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+  border: 2px solid #ddd;
+    transition: 0.3s;
+}
+.thumb.active-thumb {
+  border: 2px solid #25D366;
+  transform: scale(1.08);
+}
+.thumb:hover {
+    transform: scale(1.05);
+}
+
+.active-thumb {
+    border-color: #25D366 !important;
+}
+
+.brand-label {
+    background: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.p-title-detail{
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.btn-whatsapp-large {
+    background: #25D366;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+      display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(37,211,102,0.3);
+}
+
+.btn-whatsapp-large:hover {
+    background: #1ebe5d;
+}
+@media (max-width: 768px){
+
+  .product-container{
+    grid-template-columns: 1fr;
+  }
+
+  .product-gallery{
+    position: static;
+  }
+
+  .main-img{
+    max-height: 350px;
+    object-fit: contain;
+  }
+
+}
+/* تثبيت معلومات المنتج عند التمرير في الشاشات الكبيرة */
+@media (min-width: 769px) {
+    .product-info {
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+    }
+}
+
+/* تحسين شكل الوصف */
+.p-desc {
+    line-height: 1.8;
+    color: #555;
+    margin: 20px 0;
+}
+
+/* إضافة تأثير عند تمرير الفأرة على الصورة الرئيسية */
+.main-img:hover {
+    cursor: zoom-in;
+    transform: scale(1.02);
+    transition: transform 0.5s ease;
+}
+.product-gallery {
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+#main-view {
+    width: 100%;
+    transition: transform 0.1s ease-out; /* استجابة سريعة للحركة */
+    transform-origin: center center;
+}
+.product-gallery {
+    position: relative;
+    overflow: hidden; /* لمنع خروج الصورة المكبرة عن الإطار */
+    border-radius: 12px;
+}
+
+#main-view {
+    transition: transform 0.5s ease; /* حركة ناعمة */
+    cursor: zoom-in;
+}
+
+.product-gallery:hover #main-view {
+    transform: scale(1.5); /* درجة التكبير (يمكنك تغييرها لـ 2) */
+}
+/* تنسيق العلامة التجارية (Brand) */
+.brand-label {
+    background: #f0f2f5;
+    color: #4b5563;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+/* تنسيق عنوان المنتج */
+.p-title-detail {
+    font-size: 28px;
+    color: #1a202c;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+/* تنسيق الوصف المختصر */
+.p-desc {
+    font-size: 16px;
+    color: #718096;
+    margin-bottom: 25px;
+    border-left: 3px solid #25D366; /* إضافة لمسة جمالية جانبية */
+    padding-left: 15px;
+}
+
+/* تطوير زر الواتساب */
+.btn-whatsapp-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+
+.btn-whatsapp-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(37, 211, 102, 0.3);
+}
