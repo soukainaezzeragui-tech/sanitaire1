@@ -45,7 +45,7 @@ function loadHeader() {
         ${createCategory("Pompe & Traitement des eaux", "univers-water.webp", "pompe-traitement-eaux")}
         ${createCategory("Électricité & Éclairage", "univers-electricity.webp", "electricite-eclairage")}
         ${createCategory("Plomberie", "plombiere.webp", "plomberie")}
-        ${createCategory("Menuiserie & Sécurité", "117750.jpg", "Menuiserie-Sécurité")}
+        ${createCategory("Menuiserie & Sécurité", "117750.jpg", "Menuiserie-Securite")}
         ${createCategory("Jardinage & Extérieur", "univers-garden.webp", "jardinage-exterieur")}
         ${createCategory("Outillage & Bricolage", "bricolage.webp", "bricolage-outillage")}
         ${createCategory("Cuisine & dressing", "univers-kitchen.webp", "cuisine", "Cuisine & dressing")}
