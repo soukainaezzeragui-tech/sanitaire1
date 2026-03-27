@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       src: "images/ms-doorphone.webp",
       title: "Interphones & sécurité",
       subtitle: "Contrôle d’accès moderne et protection optimale",
-      link: "/Menuiserie-Sécurité",
+      link: "/Menuiserie-Securite",
     },
     {
       src: "images/ms-electrisite.webp",
