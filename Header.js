@@ -96,9 +96,9 @@ function loadFooter() {
               des années.
             </p>
             <div class="social-icons">
-              <a href="#">FB</a>
-              <a href="#">IG</a>
-              <a href="#">WA</a>
+              <a href="https://www.facebook.com/people/Sanitaire-Al-Houda-Outaleb/100080128786175/" target="_blank" rel="noopener">FB</a>
+              <a href="https://www.instagram.com/sanitairealhouda2/" target="_blank" rel="noopener">IG</a>
+              <a href="https://wa.me/212667361575" target="_blank" rel="noopener">WA</a>
             </div>
           </div>
 
