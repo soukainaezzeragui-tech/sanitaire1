@@ -17,9 +17,13 @@ var APP_CONFIG = {
   cloudName: 'ddrfdunoq',
   uploadPreset: 'sah_admin',
 
-  // Limites d'images appliquées avant l'envoi
-  imageMaxBytes: 10 * 1024 * 1024,      // 10 Mo
-  imageMaxWidth: 2000,                  // pixels (redimensionné côté client)
+  // Limites d'images appliquées avant l'envoi.
+  // Le fichier partant vers Cloudinary est TOUJOURS le JPEG compressé
+  // (small), donc ce seuil n'est qu'une garde mémoire pour la lecture
+  // de l'original. Les photos de téléphone (jusqu'à ~40 Mo) passent
+  // et sont réduites côté client.
+  imageMaxBytes: 40 * 1024 * 1024,      // 40 Mo (original autorisé)
+  imageMaxWidth: 1600,                  // pixels (redimensionné côté client)
 
   // Signification des statuts (respecte le système existant)
   statuses: [

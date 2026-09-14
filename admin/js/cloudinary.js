@@ -15,7 +15,7 @@ function validateImageFile(file) {
     throw new Error('Format non accepté. Utilisez JPG, PNG ou WEBP.');
   }
   if (file.size > APP_CONFIG.imageMaxBytes) {
-    throw new Error('Image trop lourde (max 10 Mo).');
+    throw new Error('Image trop lourde (max ' + Math.round(APP_CONFIG.imageMaxBytes / (1024 * 1024)) + ' Mo).');
   }
   return { file: file };
 }
@@ -45,7 +45,10 @@ function previewLocalFile(file, img) {
 /* ------- Phase 6 : upload Cloudinary (non signé) ------- */
 
 /**
- * Redimensionne/compresse une image via Canvas (max 2000 px, JPEG q=0.85).
+ * Redimensionne/compresse une image via Canvas
+ * (taille max = APP_CONFIG.imageMaxWidth, JPEG q=0.85).
+ * Garantit que le fichier envoyé est bien sous les limites
+ * Cloudinary (10 Mo / 25 MP) même imposées par le plan gratuit.
  * @param {File} file Fichier d'origine
  * @return {Promise<Blob>} Blob JPEG prêt à envoyer
  */
