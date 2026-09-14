@@ -154,28 +154,87 @@ body {
 }
 
 /* ================================
+   HAMBURGER (MOBILE)
+=============================== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ================================
    RESPONSIVE
 ================================ */
 @media (max-width: 768px) {
-  .nav-panel {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .search-box {
-    margin: 10px 0;
-    max-width: 100%;
-  }
-
-  .menu {
+  .menu-toggle {
     display: flex;
+  }
+
+  .nav-panel {
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
+    text-align: center;
     gap: 10px;
   }
 
+  .logo {
+    margin-right: auto;
+  }
+
+  .search-box {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 8px 0 0;
+  }
+
+  .menu {
+    order: 4;
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
   .menu a {
-    margin: 0;
+    margin: 6px 0;
     font-size: 14px;
   }
 }
@@ -256,7 +315,7 @@ body {
 .slide-content .btn-order {
   display: inline-block;
   padding: 12px 30px;
-  background: #ff5722;
+  background: var(--primary-color);
   color: #fff;
   text-decoration: none;
   border-radius: 50px;
@@ -267,7 +326,7 @@ body {
 }
 
 .slide-content .btn-order:hover {
-  background: #e64a19;
+  background: #004494;
   transform: scale(1.05) translateY(0);
 }
 

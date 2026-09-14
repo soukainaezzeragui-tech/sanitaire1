@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSlider();
   loadCategorizedProducts();
   initMegaMenuMobile();
+  initMenuToggle();
 });
 /*----------------*/
 function doSearch() {
@@ -146,6 +147,23 @@ function commandeProduit(produit) {
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
   window.open(whatsappURL, "_blank"); // يفتح رابط واتساب في تبويب جديد
+}
+
+function initMenuToggle() {
+  var btn = document.getElementById('menuToggle');
+  var menu = document.getElementById('mainMenu');
+  if (!btn || !menu) return;
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    btn.classList.toggle('active', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!menu.classList.contains('open'));
+  });
+  menu.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('click', function () { setOpen(false); });
 }
 
 

@@ -28,7 +28,10 @@ function loadHeader() {
     <button aria-label="Rechercher">🔍</button>
     </form>
 </div>
-          <nav class="menu">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainMenu">
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="menu" id="mainMenu">
             <a href="../">Accueil</a>
             <a href="../contact/">Contact</a>
             <a href="https://wa.me/212667361575" class="btn-order">WhatsApp</a>
@@ -141,8 +144,26 @@ function loadFooter() {
 document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
+  initMenuToggle();
 
 });
+
+function initMenuToggle() {
+  var btn = document.getElementById('menuToggle');
+  var menu = document.getElementById('mainMenu');
+  if (!btn || !menu) return;
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    btn.classList.toggle('active', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!menu.classList.contains('open'));
+  });
+  menu.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('click', function () { setOpen(false); });
+}
 
 
 
