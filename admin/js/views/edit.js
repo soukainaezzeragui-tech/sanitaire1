@@ -89,7 +89,7 @@ function renderEditView(container, product) {
       slot.setUrl(currentUrl);
       slot.setOriginalUrl(currentUrl);
       var preview = slotsEl.querySelectorAll('.img-preview')[i];
-      if (preview) preview.src = currentUrl;
+      if (preview) preview.src = cloudinaryTransform(currentUrl, 'w_600,q_auto,f_auto');
       slotsEl.querySelectorAll('.img-slot')[i].classList.add('has-img');
       var removeBtn = slotsEl.querySelectorAll('.btn-remove')[i];
       if (removeBtn) removeBtn.classList.remove('hidden');

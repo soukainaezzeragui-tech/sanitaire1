@@ -17,7 +17,7 @@ function renderViewView(container, product) {
 
   var imgs = gallery.length
     ? gallery.map(function (u, i) {
-        return '<div class="img-slot has-img"><img class="img-preview" style="display:block" src="' + esc(u) + '" alt="Image ' + (i + 1) + '"></div>';
+        return '<div class="img-slot has-img"><img class="img-preview" style="display:block" src="' + esc(cloudinaryTransform(u, 'w_1200,q_auto,f_auto')) + '" alt="Image ' + (i + 1) + '"></div>';
       }).join('')
     : '<p class="page-sub">Aucune image.</p>';
 
