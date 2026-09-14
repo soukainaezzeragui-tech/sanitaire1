@@ -4,7 +4,7 @@
 ================================ */
 async function loadCategorizedProducts() {
   const CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?gid=0&output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?gid=0&single=true&output=csv";
   try {
     const response = await fetch(CSV_URL);
     const csvText = await response.text();
