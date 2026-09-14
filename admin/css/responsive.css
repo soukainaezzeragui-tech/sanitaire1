@@ -1,0 +1,32 @@
+/* ============================================================
+   SANITAIRE AL HOUDA II — Responsive (Tablet / Mobile)
+   ============================================================ */
+
+@media (max-width: 900px) {
+  table.data th { top: 0; }
+  .img-slots { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .main { padding: 16px 10px 60px; }
+
+  .topbar { padding: 10px 12px; gap: 8px; }
+  .brand-sub { display: none; }
+  .topnav { order: 3; flex-basis: 100%; justify-content: stretch; }
+  .nav-link { flex: 1; text-align: center; font-size: 13px; padding: 8px 4px; }
+  .topbar-user { order: 2; }
+  #btn-logout { font-size: 12px; padding: 6px 10px; }
+
+  .page-title { font-size: 17px; }
+  .card-pad { padding: 14px; }
+
+  .toolbar .search { min-width: 100%; }
+  .toolbar .select { flex: 1; min-width: 0; }
+
+  .cell-actions { flex-direction: column; align-items: stretch; }
+  .cell-actions .btn { justify-content: center; }
+}
+
+@media (max-width: 380px) {
+  .login-card { padding: 24px 18px; }
+}

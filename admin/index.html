@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SANITAIRE AL HOUDA II — Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ================= SCREEN LOGIN ================= -->
+  <section id="view-login" class="login-screen">
+    <form id="login-form" autocomplete="off" novalidate>
+      <div class="login-card">
+        <div class="login-logo">
+          <span class="logo-badge">SAH</span>
+        </div>
+        <h1 class="login-title">SANITAIRE AL HOUDA II</h1>
+        <p class="login-subtitle">Espace d'administration des produits</p>
+
+        <label class="field">
+          <span class="field-label">Code d'accès</span>
+          <input type="password" id="login-code" class="input" placeholder="••••" required>
+        </label>
+
+        <button type="submit" id="login-btn" class="btn btn-primary btn-block">Se connecter</button>
+        <p id="login-error" class="form-error"></p>
+
+        <details id="login-pw-details" class="login-pw-details">
+          <summary>Changer le mot de passe</summary>
+          <label class="field">
+            <span class="field-label">Mot de passe actuel</span>
+            <input type="password" id="login-pw-current" class="input" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="field-label">Nouveau mot de passe</span>
+            <input type="password" id="login-pw-fresh" class="input" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="field-label">Confirmer le nouveau</span>
+            <input type="password" id="login-pw-confirm" class="input" autocomplete="off">
+          </label>
+          <button type="button" id="login-pw-btn" class="btn btn-outline btn-block">Changer le mot de passe</button>
+          <p id="login-pw-error" class="form-error"></p>
+        </details>
+      </div>
+    </form>
+  </section>
+
+  <!-- ================= APPLICATION SHELL ================= -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <span class="logo-badge small">SAH</span>
+        <div>
+          <div class="brand-name">SANITAIRE AL HOUDA II</div>
+          <div class="brand-sub">Administration</div>
+        </div>
+      </div>
+      <nav class="topnav" id="topnav">
+        <button class="nav-link active" data-view="produits">Produits</button>
+        <button class="nav-link" data-view="ajouter">Ajouter</button>
+      </nav>
+      <div class="topbar-user">
+        <button class="btn btn-ghost" id="btn-logout" title="Déconnexion">Déconnexion</button>
+      </div>
+    </header>
+
+    <main class="main" id="main">
+      <!-- Vue courante rendue ici par app.js -->
+    </main>
+  </div>
+
+  <!-- Message flottant (toast) -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Bibliothèques JS -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/views/login.js"></script>
+  <script src="js/views/list.js"></script>
+  <script src="js/views/add.js"></script>
+  <script src="js/views/edit.js"></script>
+  <script src="js/views/view.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
