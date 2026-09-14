@@ -14,9 +14,7 @@
 .thumbnails {
     display: flex;
     gap: 10px;
-    margin-top: 15px;
-      margin-top: 20px;
-
+    margin-top: 20px;
 }
 
 .thumb {
@@ -40,35 +38,6 @@
     border-color: #25D366 !important;
 }
 
-.brand-label {
-    background: #f2f2f2;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 14px;
-}
-.p-title-detail{
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.btn-whatsapp-large {
-    background: #25D366;
-    color: white;
-    padding: 14px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-      display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  box-shadow: 0 5px 15px rgba(37,211,102,0.3);
-}
-
-.btn-whatsapp-large:hover {
-    background: #1ebe5d;
-}
 @media (max-width: 768px){
 
   .product-container{
@@ -94,44 +63,20 @@
     }
 }
 
-/* تحسين شكل الوصف */
-.p-desc {
-    line-height: 1.8;
-    color: #555;
-    margin: 20px 0;
-}
-
-/* إضافة تأثير عند تمرير الفأرة على الصورة الرئيسية */
-.main-img:hover {
-    cursor: zoom-in;
-    transform: scale(1.02);
-    transition: transform 0.5s ease;
-}
+/* صورة المنتج + الزوم (يتولّى التكبير نظام JS عبر #main-view) */
 .product-gallery {
     position: relative;
     overflow: hidden;
-    cursor: crosshair;
-}
-
-#main-view {
-    width: 100%;
-    transition: transform 0.1s ease-out; /* استجابة سريعة للحركة */
-    transform-origin: center center;
-}
-.product-gallery {
-    position: relative;
-    overflow: hidden; /* لمنع خروج الصورة المكبرة عن الإطار */
     border-radius: 12px;
 }
 
 #main-view {
-    transition: transform 0.5s ease; /* حركة ناعمة */
+    width: 100%;
     cursor: zoom-in;
+    transition: transform 0.1s ease-out;
+    transform-origin: center center;
 }
 
-.product-gallery:hover #main-view {
-    transform: scale(1.5); /* درجة التكبير (يمكنك تغييرها لـ 2) */
-}
 /* تنسيق العلامة التجارية (Brand) */
 .brand-label {
     background: #f0f2f5;
@@ -158,9 +103,10 @@
 /* تنسيق الوصف المختصر */
 .p-desc {
     font-size: 16px;
+    line-height: 1.8;
     color: #718096;
-    margin-bottom: 25px;
-    border-left: 3px solid #25D366; /* إضافة لمسة جمالية جانبية */
+    margin: 20px 0 25px;
+    border-left: 3px solid #25D366;
     padding-left: 15px;
 }
 
