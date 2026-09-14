@@ -29,24 +29,6 @@
 
         <button type="submit" id="login-btn" class="btn btn-primary btn-block">Se connecter</button>
         <p id="login-error" class="form-error"></p>
-
-        <details id="login-pw-details" class="login-pw-details">
-          <summary>Changer le mot de passe</summary>
-          <label class="field">
-            <span class="field-label">Mot de passe actuel</span>
-            <input type="password" id="login-pw-current" class="input" autocomplete="off">
-          </label>
-          <label class="field">
-            <span class="field-label">Nouveau mot de passe</span>
-            <input type="password" id="login-pw-fresh" class="input" autocomplete="off">
-          </label>
-          <label class="field">
-            <span class="field-label">Confirmer le nouveau</span>
-            <input type="password" id="login-pw-confirm" class="input" autocomplete="off">
-          </label>
-          <button type="button" id="login-pw-btn" class="btn btn-outline btn-block">Changer le mot de passe</button>
-          <p id="login-pw-error" class="form-error"></p>
-        </details>
       </div>
     </form>
   </section>
@@ -64,6 +46,7 @@
       <nav class="topnav" id="topnav">
         <button class="nav-link active" data-view="produits">Produits</button>
         <button class="nav-link" data-view="ajouter">Ajouter</button>
+        <button class="nav-link" data-view="parametres">Paramètres</button>
       </nav>
       <div class="topbar-user">
         <button class="btn btn-ghost" id="btn-logout" title="Déconnexion">Déconnexion</button>
@@ -84,6 +67,7 @@
   <script src="js/auth.js"></script>
   <script src="js/cloudinary.js"></script>
   <script src="js/views/login.js"></script>
+  <script src="js/views/settings.js"></script>
   <script src="js/views/list.js"></script>
   <script src="js/views/add.js"></script>
   <script src="js/views/edit.js"></script>

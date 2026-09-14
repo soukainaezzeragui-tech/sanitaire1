@@ -9,16 +9,18 @@
  * Appelle l'API Apps Script.
  * @param {string} action  Ex : 'getProducts', 'addProduct'...
  * @param {object} payload Données de la requête
+ * @param {string} overrideToken  (optionnel) jeton à envoyer à la place
+ *                                de celui stocké (utilisé par logout)
  * @return {Promise} Résout avec `data` si {ok:true}, sinon rejette.
  */
-function api(action, payload) {
+function api(action, payload, overrideToken) {
   var url = APP_CONFIG.apiUrl;
   if (!url) {
     return Promise.reject(new Error('URL_API_NON_CONFIG'));
   }
 
   var body = {
-    token: getToken(),
+    token: overrideToken || getToken(),
     action: action,
     payload: payload || {}
   };

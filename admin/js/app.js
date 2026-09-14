@@ -59,6 +59,7 @@ function showView(name, param) {
     case 'ajouter':  renderAddView(mainEl); break;
     case 'modifier': renderEditView(mainEl, param); break;
     case 'voir':     renderViewView(mainEl, param); break;
+    case 'parametres': renderSettingsView(mainEl); break;
     default:         renderListView(mainEl);
   }
 }

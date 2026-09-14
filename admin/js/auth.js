@@ -42,6 +42,7 @@ function login(password) {
 function logout() {
   var t = getToken();
   setToken('');
-  if (t) api('logout').catch(function () {});
+  // Envoie l'ancien jeton pour supprimer la session côté serveur.
+  if (t) api('logout', {}, t).catch(function () {});
   showView('login');
 }
