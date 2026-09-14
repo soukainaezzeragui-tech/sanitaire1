@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico">
+  <title>Page introuvable | Sanitaire Al Houda</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0056b3;
+    }
+    .error-wrap {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .error-code {
+      font-size: 96px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1;
+      color: #0056b3;
+    }
+    .error-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin: 16px 0 8px;
+    }
+    .error-text {
+      color: #667;
+      font-size: 15px;
+      max-width: 420px;
+      margin: 0 auto 28px;
+    }
+    .btn {
+      display: inline-block;
+      background: #0056b3;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      margin: 0 6px;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: #004494; }
+    .btn-ghost {
+      background: #fff;
+      color: #0056b3;
+      border: 2px solid #0056b3;
+    }
+    .btn-ghost:hover { background: #0056b3; color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="error-wrap">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Oups, cette page est introuvable</h2>
+    <p class="error-text">
+      Le lien que vous avez suivi semble incorrect ou a été déplacé.
+      Retournez à l'accueil ou contactez-nous directement sur WhatsApp.
+    </p>
+    <a href="/" class="btn">Retour à l'accueil</a>
+    <a href="https://wa.me/212667361575" class="btn btn-ghost" target="_blank" rel="noopener">Contactez-nous</a>
+  </div>
+</body>
+</html>
