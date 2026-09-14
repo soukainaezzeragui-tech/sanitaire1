@@ -117,3 +117,29 @@ function uploadToCloudinary(blob, folder, publicId) {
       return json.secure_url;
     });
 }
+
+/**
+ * Version optimisée d'une URL Cloudinary : insère des paramètres de
+ * transformation juste après "/image/upload/" pour livrer un fichier
+ * plus léger (bandwidth réduit). Renvoie l'URL inchangée si elle
+ * n'est pas une URL Cloudinary (ex : URL collée manuellement).
+ * @param {string} url     URL d'origine (secure_url Cloudinary)
+ * @param {string} params  Ex : 'w_1200,q_auto,f_auto'
+ * @return {string}
+ */
+function cloudinaryTransform(url, params) {
+  url = String(url || '').trim();
+  if (!url) return url;
+
+  var marker = '/image/upload/';
+  var idx = url.indexOf(marker);
+  if (idx === -1) return url;
+
+  // Si une transformation est déjà présente, on ne modifie rien.
+  var rest = url.slice(idx + marker.length);
+  var firstSeg = (rest.split('/')[0] || '');
+  if (firstSeg && firstSeg.indexOf('_') !== -1) return url;
+
+  params = params || 'q_auto,f_auto';
+  return url.slice(0, idx + marker.length) + params + '/' + rest;
+}
