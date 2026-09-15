@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -37,7 +38,7 @@
     <div class="container">
       <h1 id="marque-title">Produits de la marque</h1>
       <p id="marque-description">
-        Découvrez tous les produits de cette marque disponibles chez SANITAIRE AL HOUDA II.
+        DÃ©couvrez tous les produits de cette marque disponibles chez SANITAIRE AL HOUDA II.
       </p>
     </div>
   </section>
@@ -55,23 +56,23 @@
   <!-- Scripts -->
   <script src="../Header.js"></script>
 <script src="./marque-products.js"></script>
-  <!-- Script SEO dynamique & récupération marque -->
+  <!-- Script SEO dynamique & rÃ©cupÃ©ration marque -->
   <script>
-    // Récupère la marque depuis ?marque=baldini ou /marques/baldini/
+    // RÃ©cupÃ¨re la marque depuis ?marque=baldini ou /marques/baldini/
 
     const marqueName = slug
       ? slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
       : "Marque";
 
-    // Mise à jour titres et SEO
-    document.getElementById("marque-title").textContent = `Produits ${marqueName} à Laâyoune`;
+    // Mise Ã  jour titres et SEO
+    document.getElementById("marque-title").textContent = `Produits ${marqueName} Ã  LaÃ¢youne`;
     document.getElementById("marque-description").textContent =
-      `Découvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA II.`;
+      `DÃ©couvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA II.`;
     document.getElementById("breadcrumb-marque").textContent = marqueName;
-    document.title = `${marqueName} à Laâyoune | SANITAIRE AL HOUDA II`;
+    document.title = `${marqueName} Ã  LaÃ¢youne | SANITAIRE AL HOUDA II`;
     document.getElementById("meta-description").setAttribute(
       "content",
-      `Produits ${marqueName} à Laâyoune : qualité professionnelle, prix compétitifs.`
+      `Produits ${marqueName} Ã  LaÃ¢youne : qualitÃ© professionnelle, prix compÃ©titifs.`
     );
     document.getElementById("meta-keywords").setAttribute(
       "content",
@@ -79,7 +80,7 @@
     );
     document.getElementById("canonical-link").setAttribute("href", window.location.href);
 
-    // Redirection vers ?marque= si URL clean mais sans paramètre
+    // Redirection vers ?marque= si URL clean mais sans paramÃ¨tre
     if (window.location.pathname.includes("/marques/") && !window.location.search) {
       const parts = window.location.pathname.split("/");
       const slugFromPath = parts[parts.length - 2];

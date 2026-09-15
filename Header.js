@@ -145,7 +145,13 @@ document.addEventListener("DOMContentLoaded", () => {
   loadHeader();
   loadFooter();
   initMenuToggle();
-
+  if (!document.querySelector('link[rel="icon"]')) {
+    var link = document.createElement('link');
+    link.rel = 'icon';
+    link.href = '/favicon.ico';
+    link.type = 'image/x-icon';
+    document.head.appendChild(link);
+  }
 });
 
 function initMenuToggle() {
