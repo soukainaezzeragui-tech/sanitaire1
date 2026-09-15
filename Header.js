@@ -112,7 +112,7 @@ function loadFooter() {
 
           <div class="footer-col contact">
             <h4>Contact</h4>
-            <p>📍 Avenue Smara, près de la Banque Populaire, Laâyoune, Maroc</p>
+            <p>📍 Avenue Es-Smara, à côté de la Banque Attijariwafa Bank, Laâyoune</p>
             <p>📞 +212 667 361 575</p>
             <p>✉️ sanitaire.alhouda.2@gmail.com</p>
           </div>

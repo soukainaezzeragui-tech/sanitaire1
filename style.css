@@ -997,12 +997,75 @@ body {
 }
 
 /* ================================
-   SEO Text
-================================ */
+SEO Text
+=============================== */
 .seo-text p {
   text-align: center;
   padding: 5px 0;
   font-size: 0.85rem;
   color: #777;
   line-height: 1.6;
+}
+
+/* ================================
+   Local Bar (adresse + itinéraire)
+=============================== */
+.local-bar {
+  background: #0056b3;
+  color: #fff;
+  padding: 16px 0;
+}
+.local-bar .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.local-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.local-info i {
+  color: #ffd75e;
+  margin-right: 6px;
+}
+.local-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn-local {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  color: #0056b3;
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-local:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+.btn-review {
+  background: #fff7d6;
+  color: #b06000;
+}
+@media (max-width: 760px) {
+  .local-bar .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .local-actions {
+    justify-content: center;
+  }
 }

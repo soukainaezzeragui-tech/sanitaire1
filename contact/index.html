@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact - SANITAIRE AL HOUDA II</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
     :root {
-      --primary-color: #1a1a1a; /* Ø£Ø³ÙˆØ¯ Ø¹Ù…ÙŠÙ‚ Ù„Ù„ÙØ®Ø§Ù…Ø© */
-      --accent-color: #c5a059;  /* Ø°Ù‡Ø¨ÙŠ Ø®Ø§ÙØª Ø£Ùˆ Ù†Ø­Ø§Ø³ÙŠ Ù„Ù„Ù…Ø³Ø© Ø±Ø§Ù‚ÙŠØ© */
+      --primary-color: #1a1a1a; /* أس��د ع�&�`� ��فخا�&ة */
+      --accent-color: #c5a059;  /* ذ�!ب�` خافت أ�� � حاس�` ���&سة را��`ة */
       --bg-color: #fcfcfc;
       --text-muted: #666;
     }
@@ -52,7 +53,7 @@
       align-items: start;
     }
 
-    /* Ù‚Ø³Ù… Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª */
+    /* �س�& ا��&ع����&ات */
     .info-list {
       display: flex;
       flex-direction: column;
@@ -86,7 +87,38 @@
       margin: 0;
     }
 
-    /* Ù‚Ø³Ù… Ø§Ù„Ø®Ø±ÙŠØ·Ø© */
+    .local-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-local {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--primary-color);
+      color: #fff;
+      border: 2px solid var(--accent-color);
+      padding: 9px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-local:hover {
+      background: var(--accent-color);
+      color: #fff;
+    }
+    .btn-review {
+      background: var(--accent-color);
+      color: #fff;
+    }
+    .btn-review:hover {
+      background: #d8b469;
+    }
+
+    /* �س�& ا�خر�`طة */
     .map-wrapper {
       position: relative;
       border-radius: 30px;
@@ -99,7 +131,7 @@
       width: 100%;
       height: 100%;
       border: 0;
-      filter: grayscale(0.2) contrast(1.1); /* Ù„Ù…Ø³Ø© Ø³ÙŠÙ†Ù…Ø§Ø¦ÙŠØ© Ù„Ù„Ø®Ø±ÙŠØ·Ø© */
+      filter: grayscale(0.2) contrast(1.1); /* ��&سة س�`� �&ائ�`ة ��خر�`طة */
     }
 
     /* Responsive */
@@ -112,7 +144,7 @@
       }
       .map-wrapper {
         height: 400px;
-        order: -1; /* Ø§Ù„Ø®Ø±ÙŠØ·Ø© ØªØ¸Ù‡Ø± Ø£ÙˆÙ„Ø§Ù‹ ÙÙŠ Ø§Ù„Ø¬ÙˆØ§Ù„ */
+        order: -1; /* ا�خر�`طة تظ�!ر أ���ا�9 ف�` ا�ج��ا� */
       }
     }
   </style>
@@ -124,18 +156,18 @@
   <main class="contact-container">
     <header class="contact-header">
       <h1>Contactez-nous</h1>
-      <p>Nous sommes Ã  votre Ã©coute.</p>
+      <p>Nous sommes à votre écoute.</p>
     </header>
 
     <div class="contact-grid">
       <aside class="info-list">
         <div class="info-group">
           <h4>Localisation</h4>
-          <p>Avenue ES-Smara, AprÃ¨s de la Banque attijariwafa bank,<br>LaÃ¢youne, Maroc</p>
+          <p>Avenue Es-Smara, à côté de la Banque Attijariwafa Bank,<br>Laâyoune, Maroc</p>
         </div>
 
         <div class="info-group">
-          <h4>TÃ©lÃ©phone</h4>
+          <h4>Téléphone</h4>
           <a href="tel:+212667361575">+212 667 361 575</a>
         </div>
 
@@ -144,9 +176,18 @@
           <a href="mailto:sanitaire.alhouda.2@gmail.com">sanitaire.alhouda.2@gmail.com</a>
         </div>
 
-        <div class="info-group">
+<div class="info-group">
           <h4>Horaires</h4>
-          <p>Lundi â€“ Samedi : 09:00 â€“ 20:00</p>
+          <p>Lundi – Samedi : 09:00 – 20:00</p>
+        </div>
+
+        <div class="info-group">
+          <h4>Nous trouver</h4>
+          <div class="local-actions">
+            <a class="btn-local" href="https://www.google.com/maps/dir/?api=1&destination=27.1359375,-13.1791875" target="_blank" rel="noopener"><i class="fas fa-directions"></i> Itinéraire</a>
+            <a class="btn-local btn-review" href="https://www.google.com/search?q=SANITAIRE+AL+HOUDA+2&ludocid=9340895373986842072" target="_blank" rel="noopener"><i class="fas fa-star"></i> Laisser un avis</a>
+            <a class="btn-local" href="https://maps.google.com/?cid=9340895373986842072" target="_blank" rel="noopener"><i class="fas fa-map"></i> Voir sur la carte</a>
+          </div>
         </div>
       </aside>
 
