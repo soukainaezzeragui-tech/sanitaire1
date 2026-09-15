@@ -61,6 +61,10 @@ async function loadProductsByMarque() {
       const name = cols[1]?.replace(/"/g, "").trim();
       const rowMarque = cols[4]?.replace(/"/g, "").trim(); // عمود الماركة
       const image = cols[6]?.replace(/"/g, "").trim();    // عمود الصورة (تأكد من رقم العمود 6 أو 7 حسب ملفك)
+      const rowStatus = cols[7]?.replace(/"/g, "").trim();
+
+      // Statut 9 = produit masqué : exclu
+      if (rowStatus === "9") continue;
 
       if (!rowMarque) continue;
 

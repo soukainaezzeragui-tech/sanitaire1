@@ -38,6 +38,10 @@ async function loadCategorizedProducts() {
       const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
       if (cols.length < 8) continue;
 
+      const status = cols[7]?.replace(/"/g, "").trim();
+      // Statut 9 = produit masqué : exclu du catalogue
+      if (status === "9") continue;
+
       ALL_PRODUCTS.push({
         name: cols[1]?.replace(/"/g, "").trim(),
         cat: cols[2]?.replace(/"/g, "").trim().toLowerCase(),

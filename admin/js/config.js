@@ -30,6 +30,7 @@ var APP_CONFIG = {
     { value: 1, label: 'Pages principales', cls: 'st-1' },
     { value: 2, label: 'Priorité 2',       cls: 'st-2' },
     { value: 3, label: 'Priorité 3',       cls: 'st-3' },
-    { value: 4, label: 'Masqué',           cls: 'st-4' }
+    { value: 4, label: 'Priorité 4',       cls: 'st-4' },
+    { value: 9, label: 'Masqué',           cls: 'st-9' }
   ]
 };
