@@ -613,7 +613,7 @@ function createProductCard(product) {
 }
 
 function commandeProduit(productName) {
-    const phoneNumber = "+2126673615750"; 
+    const phoneNumber = "+212667361575"; 
     const message = `سلام، أريد طلب المنتج: ${productName}`;
     const url = `https://wa.me/${phoneNumber.replace(/\D/g,'')}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
