@@ -79,9 +79,6 @@ async function loadCategorizedProducts() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
-// تشغيل الدالة عند تحميل الصفحة
-document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
-loadCategorizedProducts();
 
 function commandeProduit(produit) {
   alert(
