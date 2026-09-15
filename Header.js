@@ -110,6 +110,17 @@ function loadFooter() {
             </ul>
           </div>
 
+          <div class="footer-col links">
+            <h4>Nos Marques</h4>
+            <ul>
+<li><a href="/marques/baldini/">Baldini</a></li>
+<li><a href="/marques/tesso/">Tesso</a></li>
+<li><a href="/marques/total/">Total</a></li>
+<li><a href="/marques/knof/">KNOF</a></li>
+<li><a href="/marques/henax/">Henax</a></li>
+            </ul>
+          </div>
+
           <div class="footer-col contact">
             <h4>Contact</h4>
             <p>📍 Avenue Es-Smara, à côté de la Banque Attijariwafa Bank, Laâyoune</p>
