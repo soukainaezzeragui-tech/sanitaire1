@@ -139,6 +139,7 @@ body {
   aspect-ratio: 4 / 3;
   object-fit: contain;
 }
+.product-img { position: relative; }
 
 .skeleton-card {
   height: 350px;
@@ -913,3 +914,24 @@ animation: skeleton-loading 1.5s infinite;
   margin-bottom: 20px;
   font-size: 1.1rem;
 }
+
+/* Badge / Promo label */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #fff;
+  pointer-events: none;
+}
+.badge-promo  { background: #e63946; }
+.badge-best   { background: #1b2a4e; }
+.badge-new    { background: #2a9d8f; }
+.badge-stock  { background: #e76f51; }
+.badge-soldes { background: #f4a261; }

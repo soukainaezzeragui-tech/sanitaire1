@@ -62,6 +62,7 @@ async function loadProductsByMarque() {
       const rowMarque = cols[4]?.replace(/"/g, "").trim(); // عمود الماركة
       const image = cols[6]?.replace(/"/g, "").trim();    // عمود الصورة (تأكد من رقم العمود 6 أو 7 حسب ملفك)
       const rowStatus = cols[7]?.replace(/"/g, "").trim();
+      const promo = cols[12]?.replace(/"/g, "").trim();
 
       // Statut 9 = produit masqué : exclu
       if (rowStatus === "9") continue;
@@ -77,6 +78,7 @@ async function loadProductsByMarque() {
         card.innerHTML = `
           <div class="product-img">
             <img src="${image}" alt="${name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image'">
+            ${promoBadge(promo)}
           </div>
           <h3 class="p-title">${name}</h3>
           <a href="/product.html?name=${encodeURIComponent(name)}" class="p-detail-btn">Voir plus</a>
@@ -98,3 +100,14 @@ async function loadProductsByMarque() {
 
 // 4️⃣ التنفيذ
 document.addEventListener("DOMContentLoaded", loadProductsByMarque);
+
+function promoBadge(promo) {
+  if (!promo) return "";
+  const p = promo.toLowerCase();
+  let cls = "badge-promo";
+  if (p.includes("nouveau") || p.includes("new")) cls = "badge-new";
+  else if (p.includes("best") || p.includes("top")) cls = "badge-best";
+  else if (p.includes("stock") || p.includes("limite")) cls = "badge-stock";
+  else if (p.includes("soldes")) cls = "badge-soldes";
+  return `<span class="badge ${cls}">${promo.trim()}</span>`;
+}

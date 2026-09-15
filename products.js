@@ -49,6 +49,7 @@ async function loadCategorizedProducts() {
         brand: cols[4]?.replace(/"/g, "").trim(),
         img: cols[6]?.replace(/"/g, "").trim(),
         status: parseInt(cols[7]) || 0,
+        promo: cols[12]?.replace(/"/g, "").trim(),
       });
     }
 
@@ -101,6 +102,17 @@ function executeProductSearch(query, dataToSearch) {
   });
 }
 
+function promoBadge(promo) {
+  if (!promo) return "";
+  const p = promo.toLowerCase();
+  let cls = "badge-promo";
+  if (p.includes("nouveau") || p.includes("new")) cls = "badge-new";
+  else if (p.includes("best") || p.includes("top")) cls = "badge-best";
+  else if (p.includes("stock") || p.includes("limite")) cls = "badge-stock";
+  else if (p.includes("soldes")) cls = "badge-soldes";
+  return `<span class="badge ${cls}">${promo.trim()}</span>`;
+}
+
 function displayProducts() {
   const grid = document.getElementById("products");
   if (!grid) return;
@@ -119,6 +131,7 @@ function displayProducts() {
         <a href="../product.html?name=${encodeURIComponent(p.name)}" class="product-link-wrapper">
             <div class="product-img">
                 <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/250?text=AlHouda'">
+                ${promoBadge(p.promo)}
             </div>
             <p class="p-category">${p.subCat}</p>
             <h3 class="p-title">${p.name}</h3>

@@ -16,7 +16,8 @@ async function loadSearchProducts() {
             DESCRIPTION2: 8,
             DESCRIPTION3: 9,
             IMAGE2: 10,
-            IMAGE3: 11
+            IMAGE3: 11,
+            PROMO: 12
         }
     };
 
@@ -97,6 +98,7 @@ async function loadSearchProducts() {
             const pBrand = clean(cols[CONFIG.COLUMNS.BRAND]); // âœ… Ø§Ù„Ù…Ø§Ø±ÙƒØ©
             const pDescription = clean(cols[CONFIG.COLUMNS.DESCRIPTION]);
             const pImg = clean(cols[CONFIG.COLUMNS.IMAGE]);
+            const pPromo = clean(cols[CONFIG.COLUMNS.PROMO]);
 
             // âœ… ØªØ·Ø¨ÙŠØ¹ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù†ØµÙˆØµ Ù„Ù„Ø¨Ø­Ø«
             const normalizedName = normalizeText(pName);
@@ -133,7 +135,8 @@ async function loadSearchProducts() {
                     pImg, 
                     pDescription, 
                     pBrand, 
-                    pCat 
+                    pCat,
+                    pPromo
                 });
             }
         }
@@ -268,6 +271,17 @@ async function loadSearchProducts() {
     }
 }
 
+function promoBadge(promo) {
+    if (!promo) return "";
+    const p = promo.toLowerCase();
+    let cls = "badge-promo";
+    if (p.includes("nouveau") || p.includes("new")) cls = "badge-new";
+    else if (p.includes("best") || p.includes("top")) cls = "badge-best";
+    else if (p.includes("stock") || p.includes("limite")) cls = "badge-stock";
+    else if (p.includes("soldes")) cls = "badge-soldes";
+    return `<span class="badge ${cls}">${promo.trim()}</span>`;
+}
+
 function createProductCard(product) {
     const imageUrl = product.pImg || '/images/placeholder.jpg';
     const shortDescription = product.pDescription 
@@ -283,6 +297,7 @@ function createProductCard(product) {
                      alt="${product.pName}" 
                      loading="lazy"
                      onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"> 
+                ${promoBadge(product.pPromo)}
             </div> 
             <div class="product-info">
                 <p class="p-category">${product.pSubCat || product.pCat || 'Ù…Ù†ØªØ¬'}</p> 

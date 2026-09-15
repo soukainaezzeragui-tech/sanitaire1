@@ -38,6 +38,7 @@ async function loadCategorizedProducts() {
       const pSubCat = cols[3]?.replace(/"/g, "").trim(); // الفئة الفرعية
       const pImg = cols[6]?.replace(/"/g, "").trim();
       const pStatus = cols[7]?.replace(/"/g, "").trim();
+      const pPromo = cols[12]?.replace(/"/g, "").trim();
 
       if (pStatus !== "1") continue;
 
@@ -46,6 +47,7 @@ async function loadCategorizedProducts() {
   <div class="product-card">
     <div class="product-img-container"> 
       <img src="${pImg}" alt="${pName}" loading="lazy"> 
+      ${promoBadge(pPromo)}
     </div> 
     
     <div class="product-info">
@@ -79,6 +81,17 @@ async function loadCategorizedProducts() {
 }
 
 document.addEventListener("DOMContentLoaded", loadCategorizedProducts);
+
+function promoBadge(promo) {
+  if (!promo) return "";
+  const p = promo.toLowerCase();
+  let cls = "badge-promo";
+  if (p.includes("nouveau") || p.includes("new")) cls = "badge-new";
+  else if (p.includes("best") || p.includes("top")) cls = "badge-best";
+  else if (p.includes("stock") || p.includes("limite")) cls = "badge-stock";
+  else if (p.includes("soldes")) cls = "badge-soldes";
+  return `<span class="badge ${cls}">${promo.trim()}</span>`;
+}
 
 function commandeProduit(produit) {
   alert(
