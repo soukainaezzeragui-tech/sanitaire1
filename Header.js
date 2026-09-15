@@ -18,7 +18,7 @@ function loadHeader() {
       <div class="container">
         <div class="nav-panel">
           <div class="logo">
-            <h1>SANITAIRE AL HOUDA <span>II</span></h1>
+            <h1>SANITAIRE AL HOUDA <span>2</span></h1>
             <p>Matériaux de construction • Plomberie • Électricité • Peinture</p>
           </div>
 
@@ -89,7 +89,7 @@ function loadFooter() {
     <footer class="main-footer">
         <div class="container footer-grid">
           <div class="footer-col about">
-            <h3>SANITAIRE AL HOUDA <span>II</span></h3>
+            <h3>SANITAIRE AL HOUDA <span>2</span></h3>
             <p>
               Votre expert de référence en matériaux de construction, plomberie,
               électricité et peinture. Haute qualité et service fiable depuis
@@ -121,7 +121,7 @@ function loadFooter() {
             <h4><i class="fas fa-map-marked-alt"></i> Notre emplacement</h4>
             <div class="map-container">
               <iframe
-                title="Localisation SANITAIRE AL HOUDA II à Laâyoune"
+                title="Localisation SANITAIRE AL HOUDA 2 à Laâyoune"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d373.2162430973931!2d-13.178955940129445!3d27.13579116033025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc377300749d3661%3A0x81a186da3a9345d8!2sSANITAIRE%20AL%20HOUDA%202!5e0!3m2!1sar!2s!4v1771433433259!5m2!1sar!2s"
                 width="100%"
                 height="250"

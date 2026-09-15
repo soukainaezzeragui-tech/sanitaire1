@@ -38,7 +38,7 @@
     <div class="container">
       <h1 id="marque-title">Produits de la marque</h1>
       <p id="marque-description">
-        DÃ©couvrez tous les produits de cette marque disponibles chez SANITAIRE AL HOUDA II.
+        Découvrez tous les produits de cette marque disponibles chez SANITAIRE AL HOUDA 2.
       </p>
     </div>
   </section>
@@ -56,23 +56,23 @@
   <!-- Scripts -->
   <script src="../Header.js"></script>
 <script src="./marque-products.js"></script>
-  <!-- Script SEO dynamique & rÃ©cupÃ©ration marque -->
+  <!-- Script SEO dynamique & récupération marque -->
   <script>
-    // RÃ©cupÃ¨re la marque depuis ?marque=baldini ou /marques/baldini/
+    // Récupère la marque depuis ?marque=baldini ou /marques/baldini/
 
     const marqueName = slug
       ? slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
       : "Marque";
 
-    // Mise Ã  jour titres et SEO
-    document.getElementById("marque-title").textContent = `Produits ${marqueName} Ã  LaÃ¢youne`;
+    // Mise à jour titres et SEO
+    document.getElementById("marque-title").textContent = `Produits ${marqueName} à Laâyoune`;
     document.getElementById("marque-description").textContent =
-      `DÃ©couvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA II.`;
+      `Découvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA 2.`;
     document.getElementById("breadcrumb-marque").textContent = marqueName;
-    document.title = `${marqueName} Ã  LaÃ¢youne | SANITAIRE AL HOUDA II`;
+    document.title = `${marqueName} à Laâyoune | SANITAIRE AL HOUDA 2`;
     document.getElementById("meta-description").setAttribute(
       "content",
-      `Produits ${marqueName} Ã  LaÃ¢youne : qualitÃ© professionnelle, prix compÃ©titifs.`
+      `Produits ${marqueName} à Laâyoune : qualité professionnelle, prix compétitifs.`
     );
     document.getElementById("meta-keywords").setAttribute(
       "content",
@@ -80,7 +80,7 @@
     );
     document.getElementById("canonical-link").setAttribute("href", window.location.href);
 
-    // Redirection vers ?marque= si URL clean mais sans paramÃ¨tre
+    // Redirection vers ?marque= si URL clean mais sans paramètre
     if (window.location.pathname.includes("/marques/") && !window.location.search) {
       const parts = window.location.pathname.split("/");
       const slugFromPath = parts[parts.length - 2];

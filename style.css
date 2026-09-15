@@ -757,6 +757,30 @@ body {
   transform: scale(1.05);
 }
 
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  height: 51px;
+  padding: 0 18px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1b2a4e;
+  background: #fff;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  transition: .3s;
+}
+
+.brand-chip:hover {
+  border-color: #c9a227;
+  color: #a8801f;
+  opacity: 1;
+}
+
 /* ================================
    WhatsApp Float
 ================================ */

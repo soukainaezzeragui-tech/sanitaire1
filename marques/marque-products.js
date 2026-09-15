@@ -24,9 +24,9 @@ const updateElement = (id, text, attr = "textContent") => {
 };
 
 updateElement("marque-title", `Produits ${marqueName} à Laâyoune`);
-updateElement("marque-description", `Découvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA II.`);
+updateElement("marque-description", `Découvrez tous les produits de la marque ${marqueName} disponibles chez SANITAIRE AL HOUDA 2.`);
 updateElement("breadcrumb-marque", marqueName);
-document.title = `${marqueName} à Laâyoune | SANITAIRE AL HOUDA II`;
+document.title = `${marqueName} à Laâyoune | SANITAIRE AL HOUDA 2`;
 
 updateElement("meta-description", `Produits ${marqueName} à Laâyoune : qualité professionnelle, prix compétitifs.`, "content");
 updateElement("meta-keywords", `${marqueName}, sanitaire ${marqueName}, robinetterie ${marqueName}`, "content");
@@ -79,7 +79,7 @@ async function loadProductsByMarque() {
             <img src="${image}" alt="${name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image'">
           </div>
           <h3 class="p-title">${name}</h3>
-          <a href="../product.html?name=${encodeURIComponent(name)}" class="p-detail-btn">Voir plus</a>
+          <a href="/product.html?name=${encodeURIComponent(name)}" class="p-detail-btn">Voir plus</a>
         `;
         container.appendChild(card);
       }
