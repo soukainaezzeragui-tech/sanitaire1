@@ -7,6 +7,36 @@ const CSV_URL =
 
 const WHATSAPP = "212667361575";
 
+const CAT_SLUG = {
+  "sanitaire":             "salle-de-bain",
+  "plomberie":             "plomberie",
+  "bricolage-outillage":   "bricolage-outillage",
+  "cuisine":               "cuisine",
+  "climatisation-chauffage": "climatisation-chauffage",
+  "electricite-eclairage": "electricite-eclairage",
+  "menuiserie-securite":   "Menuiserie-Securite",
+  "peinture-decoration":   "peinture-decoration",
+  "pompe-traitement-eaux": "pompe-traitement-eaux",
+  "jardinage-exterieur":   "jardinage-exterieur"
+};
+const CAT_LABEL = {
+  "salle-de-bain": "Salle de bain",
+  "plomberie": "Plomberie",
+  "bricolage-outillage": "Outillage & Bricolage",
+  "cuisine": "Cuisine & Dressing",
+  "climatisation-chauffage": "Climatisation & Chauffage",
+  "electricite-eclairage": "Électricité & Éclairage",
+  "menuiserie-securite": "Menuiserie & Sécurité",
+  "peinture-decoration": "Peinture & Décoration",
+  "pompe-traitement-eaux": "Pompe & Traitement des eaux",
+  "jardinage-exterieur": "Jardinage & Extérieur"
+};
+function catSlug(cat) { return CAT_SLUG[String(cat).toLowerCase()] || null; }
+function catLabel(cat) {
+  const slug = catSlug(cat);
+  return (slug && CAT_LABEL[slug]) || cat || "";
+}
+
 const esc = (s) => {
   const d = document.createElement("div");
   d.textContent = s;
@@ -59,17 +89,30 @@ function parseRows(csvText) {
 function renderBreadcrumb(p) {
   const cat = p.category;
   const sub = p.subCategory;
+  const slug = catSlug(cat);
+  const catName = catLabel(cat);
+
   let html = '<nav class="pd-breadcrumb">';
   html += '<a href="/"><i class="fas fa-home"></i> Accueil</a>';
   html += '<span class="sep">/</span>';
-  if (cat) {
-    html += `<a href="/${encodeURIComponent(cat.toLowerCase())}/">${esc(cat)}</a>`;
-    html += '<span class="sep">/</span>';
+
+  if (slug) {
+    html += `<a href="/${encodeURIComponent(slug)}/">${esc(catName)}</a>`;
+    if (sub) html += '<span class="sep">/</span>';
+  } else if (cat) {
+    html += `<span class="cur">${esc(catName)}</span>`;
+    if (sub) html += '<span class="sep">/</span>';
   }
+
   if (sub) {
-    html += `<a href="/${encodeURIComponent(cat ? cat.toLowerCase() : '')}/${encodeURIComponent(sub.toLowerCase())}/">${esc(sub)}</a>`;
+    if (slug) {
+      html += `<a href="/${encodeURIComponent(slug)}/#${encodeURIComponent(sub.toLowerCase())}">${esc(sub)}</a>`;
+    } else {
+      html += `<span>${esc(sub)}</span>`;
+    }
     html += '<span class="sep">/</span>';
   }
+
   html += `<span class="cur">${esc(p.name)}</span>`;
   html += '</nav>';
   return html;
@@ -103,10 +146,12 @@ function renderInfo(p) {
   const fullDesc = [p.description, p.desc2, p.desc3].filter(Boolean).join('<br><br>');
   const waMsg = `Bonjour, je suis intéressé par : ${p.name}`;
   const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMsg)}`;
-  const catLink = p.category
-    ? `<a href="/${encodeURIComponent(p.category.toLowerCase())}/">${esc(p.category)}</a>` : "";
-  const subLink = p.subCategory
-    ? ` / <span>${esc(p.subCategory)}</span>` : "";
+  const slug = catSlug(p.category);
+  const catName = catLabel(p.category);
+  const catLink = slug
+    ? `<a href="/${encodeURIComponent(slug)}/">${esc(catName)}</a>`
+    : (p.category ? `<span>${esc(catName)}</span>` : "");
+  const subLink = p.subCategory ? ` / <span>${esc(p.subCategory)}</span>` : "";
 
   let html = '<div class="pd-info">';
   if (p.marque) html += `<span class="pd-brand">${esc(p.marque)}</span>`;

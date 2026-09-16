@@ -56,7 +56,7 @@ async function loadCategorizedProducts() {
     ALL_PRODUCTS.sort((a, b) => a.status - b.status);
     selectedCategory = getCategoryFromPath();
 
-const hash = window.location.hash.replace('#', '');
+const hash = decodeURIComponent(window.location.hash.replace('#', ''));
 if (hash) {
     selectedCategory = hash.toLowerCase();
 }
