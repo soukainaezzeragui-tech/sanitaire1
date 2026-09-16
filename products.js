@@ -10,6 +10,30 @@ const getUrlParam = (key) => new URLSearchParams(window.location.search).get(key
 const CATEGORY_MAP = {
   "salle-de-bain": "sanitaire",
 };
+function parseCSV(text) {
+  const records = [];
+  let record = [], field = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else inQ = false;
+      } else field += c;
+    } else if (c === '"') {
+      inQ = true;
+    } else if (c === ",") {
+      record.push(field); field = "";
+    } else if (c === "\n") {
+      record.push(field); field = "";
+      records.push(record); record = [];
+    } else if (c !== "\r") {
+      field += c;
+    }
+  }
+  if (field !== "" || record.length) { record.push(field); records.push(record); }
+  return records;
+}
 function getCategoryFromPath() {
   const path = window.location.pathname;
   const parts = path.split("/").filter(Boolean);
@@ -31,11 +55,11 @@ async function loadCategorizedProducts() {
   try {
     const res = await fetch(CSV_URL);
     const csvText = await res.text();
-    const rows = csvText.split(/\r?\n/).filter((r) => r.trim());
+    const rows = parseCSV(csvText);
 
     ALL_PRODUCTS = [];
     for (let i = 1; i < rows.length; i++) {
-      const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+      const cols = rows[i];
       if (cols.length < 8) continue;
 
       const status = cols[7]?.replace(/"/g, "").trim();
@@ -43,13 +67,13 @@ async function loadCategorizedProducts() {
       if (status === "9") continue;
 
       ALL_PRODUCTS.push({
-        name: cols[1]?.replace(/"/g, "").trim(),
-        cat: cols[2]?.replace(/"/g, "").trim().toLowerCase(),
-        subCat: cols[3]?.replace(/"/g, "").trim().toLowerCase(),
-        brand: cols[4]?.replace(/"/g, "").trim(),
-        img: cols[6]?.replace(/"/g, "").trim(),
+        name: cols[1]?.replace(/"/g, "").replace(/[\r\n]+/g, " ").trim(),
+        cat: cols[2]?.replace(/"/g, "").replace(/[\r\n]+/g, " ").trim().toLowerCase(),
+        subCat: cols[3]?.replace(/"/g, "").replace(/[\r\n]+/g, " ").trim().toLowerCase(),
+        brand: cols[4]?.replace(/"/g, "").replace(/[\r\n]+/g, " ").trim(),
+        img: cols[6]?.replace(/"/g, "").replace(/[\r\n]+/g, " ").trim(),
         status: parseInt(cols[7]) || 0,
-        promo: cols[12]?.replace(/"/g, "").trim(),
+        promo: cols[12]?.replace(/"/g, "").replace(/[\r\n]+/g, " ").trim(),
       });
     }
 

@@ -1,14 +1,39 @@
 
 /* ================================
    PRODUCTS FROM GOOGLE SHEETS
-================================ */
+=============================== */
+function parseCSV(text) {
+  const records = [];
+  let record = [], field = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else inQ = false;
+      } else field += c;
+    } else if (c === '"') {
+      inQ = true;
+    } else if (c === ",") {
+      record.push(field); field = "";
+    } else if (c === "\n") {
+      record.push(field); field = "";
+      records.push(record); record = [];
+    } else if (c !== "\r") {
+      field += c;
+    }
+  }
+  if (field !== "" || record.length) { record.push(field); records.push(record); }
+  return records;
+}
+
 async function loadCategorizedProducts() {
   const CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?gid=0&single=true&output=csv";
   try {
     const response = await fetch(CSV_URL);
     const csvText = await response.text();
-    const rows = csvText.split(/\r?\n/).filter((r) => r.trim());
+    const rows = parseCSV(csvText);
 
     // مصفوفة بالأقسام التي نريد تعبئتها
     const sections = {
@@ -31,7 +56,7 @@ async function loadCategorizedProducts() {
     const limitPerSection = 4;
 
     for (let i = 1; i < rows.length; i++) {
-      const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+      const cols = rows[i];
       if (cols.length < 8) continue;
 
       const pName = cols[1]?.replace(/"/g, "").trim();

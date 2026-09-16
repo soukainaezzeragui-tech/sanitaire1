@@ -34,6 +34,30 @@ updateElement("canonical-link", window.location.href, "href");
 
 // 3️⃣ دالة تحميل المنتجات المعدلة
 async function loadProductsByMarque() {
+  const parseCSV = (text) => {
+    const records = [];
+    let record = [], field = "", inQ = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (inQ) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; }
+          else inQ = false;
+        } else field += c;
+      } else if (c === '"') {
+        inQ = true;
+      } else if (c === ",") {
+        record.push(field); field = "";
+      } else if (c === "\n") {
+        record.push(field); field = "";
+        records.push(record); record = [];
+      } else if (c !== "\r") {
+        field += c;
+      }
+    }
+    if (field !== "" || record.length) { record.push(field); records.push(record); }
+    return records;
+  };
   const container = document.getElementById("products");
   if (!container) return;
 
@@ -49,14 +73,13 @@ async function loadProductsByMarque() {
     const data = await response.text();
     
     // تقسيم الصفوف مع تجنب الأسطر الفارغة
-    const rows = data.split(/\r?\n/).filter(row => row.trim());
+    const rows = parseCSV(data);
 
     container.innerHTML = ""; // مسح رسالة التحميل
 
     // حلقة التكرار (تبدأ من 1 لتخطي العنوان)
     for (let i = 1; i < rows.length; i++) {
-      // استخدام Regex للتقسيم الصحيح للأعمدة التي تحتوي على فواصل داخل نصوصها
-      const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+      const cols = rows[i];
       
       const name = cols[1]?.replace(/"/g, "").trim();
       const rowMarque = cols[4]?.replace(/"/g, "").trim(); // عمود الماركة

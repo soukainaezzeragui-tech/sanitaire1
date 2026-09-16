@@ -1,4 +1,28 @@
 async function loadSearchProducts() {
+    const parseCSV = (text) => {
+      const records = [];
+      let record = [], field = "", inQ = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (inQ) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { field += '"'; i++; }
+            else inQ = false;
+          } else field += c;
+        } else if (c === '"') {
+          inQ = true;
+        } else if (c === ",") {
+          record.push(field); field = "";
+        } else if (c === "\n") {
+          record.push(field); field = "";
+          records.push(record); record = [];
+        } else if (c !== "\r") {
+          field += c;
+        }
+      }
+      if (field !== "" || record.length) { record.push(field); records.push(record); }
+      return records;
+    };
     const CONFIG = {
         CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0qnUzNmU46GUWrjrFJNJUoV3jtOcfD0b7uK1Y_k-7ad0m1-0C_AGSdEL6Jgh1aonTLTYl3Z50SGq6/pub?output=csv",
         HIDDEN_STATUS: "9",
@@ -62,7 +86,7 @@ async function loadSearchProducts() {
         if (!response.ok) throw new Error('Impossible de charger les donnÃ©es.');
         
         const csvText = await response.text();
-        const rows = csvText.split(/\r?\n/).filter(row => row.trim());
+        const rows = parseCSV(csvText);
 
         // Ø¯Ø§Ù„Ø© ØªÙ†Ø¸ÙŠÙ Ø§Ù„Ù†Øµ
         const clean = (val) => val ? val.replace(/^"|"$/g, "").trim() : "";
@@ -83,7 +107,7 @@ async function loadSearchProducts() {
         const allResults = [];
 
         for (let i = 1; i < rows.length; i++) {
-            const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            const cols = rows[i];
             if (cols.length < CONFIG.MIN_COLUMNS) continue;
 
             const pStatus = clean(cols[CONFIG.COLUMNS.STATUS]);

@@ -56,11 +56,36 @@ function badgeClass(p) {
   return "badge-promo";
 }
 
+function parseCSV(text) {
+  const records = [];
+  let record = [], field = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else inQ = false;
+      } else field += c;
+    } else if (c === '"') {
+      inQ = true;
+    } else if (c === ",") {
+      record.push(field); field = "";
+    } else if (c === "\n") {
+      record.push(field); field = "";
+      records.push(record); record = [];
+    } else if (c !== "\r") {
+      field += c;
+    }
+  }
+  if (field !== "" || record.length) { record.push(field); records.push(record); }
+  return records;
+}
+
 function parseRows(csvText) {
-  const rows = csvText.split(/\r?\n/).filter(Boolean);
+  const rows = parseCSV(csvText);
   const products = [];
   for (let i = 1; i < rows.length; i++) {
-    const cols = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+    const cols = rows[i];
     const name = clean(cols[1]);
     if (!name) continue;
     products.push({
