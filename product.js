@@ -166,9 +166,9 @@ function renderInfo(p) {
   html += `<a class="pd-cta" href="${waLink}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Demander le prix via WhatsApp</a>`;
 
   html += '<div class="pd-trust">';
-  html += `<div class="pd-trust-item"><i class="fas fa-truck"></i><span>Livraison<br>tout le Maroc</span></div>`;
-  html += `<div class="pd-trust-item"><i class="fas fa-hand-holding-dollar"></i><span>Paiement<br>à la livraison</span></div>`;
-  html += `<div class="pd-trust-item"><i class="fas fa-headset"></i><span>Service<br>après-vente</span></div>`;
+  html += `<div class="pd-trust-item"><i class="fas fa-award"></i><span>Produits<br>authentiques</span></div>`;
+  html += `<div class="pd-trust-item"><i class="fas fa-store"></i><span>Disponible<br>en magasin</span></div>`;
+  html += `<div class="pd-trust-item"><i class="fas fa-user-tie"></i><span>Conseil<br>d'expert</span></div>`;
   html += '</div>';
   html += '</div>';
   return html;
