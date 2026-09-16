@@ -104,7 +104,7 @@ function renderInfo(p) {
   const waMsg = `Bonjour, je suis intéressé par : ${p.name}`;
   const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMsg)}`;
   const catLink = p.category
-    ? `/<a href="/${encodeURIComponent(p.category.toLowerCase())}/">${esc(p.category)}</a>` : "";
+    ? `<a href="/${encodeURIComponent(p.category.toLowerCase())}/">${esc(p.category)}</a>` : "";
   const subLink = p.subCategory
     ? ` / <span>${esc(p.subCategory)}</span>` : "";
 
@@ -113,7 +113,7 @@ function renderInfo(p) {
   html += `<h1 class="pd-title">${esc(p.name)}</h1>`;
 
   if (p.category || p.subCategory) {
-    html += `<div class="pd-cat-line"><i class="fas fa-tags"></i>${catLink}${subLink}</div>`;
+    html += `<div class="pd-cat-line"><i class="fas fa-tags"></i> ${catLink}${subLink}</div>`;
   }
 
   html += `<p class="pd-desc">${fullDesc}</p>`;
