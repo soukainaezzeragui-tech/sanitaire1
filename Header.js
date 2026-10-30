@@ -1,7 +1,7 @@
 // ==========================
 // CONFIGURATION: ربط ملف الـ CSS تلقائياً لضمان التصميم
 // ==========================
-if (!document.querySelector('link[href="/products.css"]')) {
+if (!document.querySelector('link[href*="products.css"]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = '/products.css'; // التأكد من المسار المطلق

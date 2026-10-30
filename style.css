@@ -59,8 +59,9 @@ body {
 /* LOGO */
 .logo h1 {
   color: var(--primary-color);
-  font-size: 24px;
+  font-size: clamp(17px, 1.75vw, 24px);
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .logo span {
@@ -68,8 +69,9 @@ body {
 }
 
 .logo p {
-  font-size: 12px;
+  font-size: clamp(10.5px, 0.85vw, 12px);
   color: #666;
+  line-height: 1.35;
 }
 
 /* SEARCH */
@@ -194,7 +196,7 @@ body {
 /* ================================
    RESPONSIVE
 ================================ */
-@media (max-width: 768px) {
+@media (max-width: 1150px) {
   .menu-toggle {
     display: flex;
   }
@@ -254,7 +256,7 @@ body {
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 400px;
+  height: min(400px, 46vh);
   margin: 0 auto;
 }
 
@@ -1130,3 +1132,165 @@ SEO Text
 .badge-new    { background: #2a9d8f; }
 .badge-stock  { background: #e76f51; }
 .badge-soldes { background: #f4a261; }
+
+/* ================================================================
+   AJUSTEMENTS PORTABLES 13"/14" (1024px -> 1440px) + ECRANS COURTS
+   ================================================================ */
+
+/* --- 1. Barre des 10 univers : plus rien n'est coupe --- */
+@media (min-width: 769px) and (max-width: 1400px) {
+  .univers-grid {
+    gap: 8px;
+    overflow: visible;
+    justify-content: space-between;
+    padding-bottom: 8px;
+  }
+  .univers-item {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .univers-icon {
+    width: clamp(64px, 6.2vw, 96px);
+    height: clamp(64px, 6.2vw, 96px);
+    margin: 0 auto 8px;
+  }
+  .univers-item span {
+    display: block;
+    font-size: clamp(11px, 0.95vw, 13px);
+    line-height: 1.25;
+  }
+}
+
+/* --- 2. En-tete : recherche sur une ligne, menu en hamburger --- */
+@media (min-width: 769px) and (max-width: 1150px) {
+  .nav-panel {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .search-box {
+    order: 2;
+    flex: 1 1 auto;
+    width: auto;
+    max-width: 340px;
+    margin: 0;
+  }
+  .menu-toggle {
+    order: 3;
+  }
+  .menu {
+    order: 4;
+    width: 100%;
+    margin-top: 4px;
+  }
+}
+
+/* --- 3. Grille produits : 4 produits par ligne sur portable --- */
+@media (min-width: 1100px) {
+  .selection-content {
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+    padding: 0;
+  }
+  .selection-content .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1280px) {
+  .selection-content {
+    grid-template-columns: 210px 1fr;
+    gap: 20px;
+  }
+  .selection-content .product-grid {
+    gap: 12px;
+  }
+  .promo-card {
+    height: 320px;
+  }
+  .product-card {
+    padding: 10px;
+  }
+  .product-img-container {
+    height: 160px;
+    margin-bottom: 10px;
+  }
+  .p-title {
+    font-size: 14px;
+    line-height: 1.35;
+    min-height: 38px;
+    margin-bottom: 8px;
+  }
+  .p-price {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Sous 1100px : 2 colonnes equilibrees (2+2) au lieu de 3+1 */
+@media (min-width: 481px) and (max-width: 1099px) {
+  .selection-content {
+    grid-template-columns: 210px 1fr;
+    gap: 20px;
+    padding: 0;
+  }
+  .selection-content .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .promo-card {
+    height: 320px;
+  }
+  .product-img-container {
+    height: 190px;
+  }
+  .p-title {
+    font-size: 15px;
+    min-height: 42px;
+  }
+  .p-price {
+    font-size: 17px;
+  }
+}
+
+/* --- 4. Ecrans peu hauts (1366x768, 1280x720, 1104x593...) --- */
+@media (max-height: 720px) {
+  .local-bar {
+    padding: 8px 0;
+  }
+  .local-info {
+    font-size: 12.5px;
+    gap: 10px;
+  }
+  .btn-local {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .slide-content h2 {
+    font-size: clamp(20px, 2vw, 28px);
+    margin-bottom: 10px;
+  }
+  .product-selection {
+    padding: 24px 0;
+  }
+  .main-footer {
+    margin-top: 32px;
+  }
+}
+
+/* --- 5. Mobile : recherche pleine largeur, barre d'univers intacte --- */
+@media (max-width: 768px) {
+  .nav-panel {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  .search-box {
+    order: 3;
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: 4px 0 0;
+  }
+}
