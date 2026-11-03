@@ -822,6 +822,8 @@ animation: skeleton-loading 1.5s infinite;
     margin: 8px 0;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.3;
     overflow: hidden;
     height: 40px; /* ØªÙˆØ­ÙŠØ¯ Ø§Ù„Ø·ÙˆÙ„ Ù„ØªØ¨Ù‚Ù‰ Ø§Ù„Ø£Ø²Ø±Ø§Ø± Ø¹Ù„Ù‰ Ù…Ø³ØªÙˆÙ‰ ÙˆØ§Ø­Ø¯ */
 }
@@ -1098,5 +1100,31 @@ animation: skeleton-loading 1.5s infinite;
     width: 100%;
     max-width: 100%;
     margin: 4px 0 0;
+  }
+}
+
+/* --- 6. Page de recherche (/recherche/) : grille responsive + titres sur 2 lignes --- */
+.products-grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.products-grid .p-title {
+  height: auto;
+  min-height: 2.8em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+@media (max-width: 1099px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+@media (max-width: 767px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 }

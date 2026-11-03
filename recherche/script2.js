@@ -33,7 +33,7 @@ async function loadSearchProducts() {
             NAME: 1,
             CATEGORY: 2,
             SUBCATEGORY: 3,
-            BRAND: 4,          // Ø¹Ù…ÙˆØ¯ Ø§Ù„Ù…Ø§Ø±ÙƒØ©
+            BRAND: 4,          // عمود الماركة
             DESCRIPTION: 5,
             IMAGE: 6,
             STATUS: 7,
@@ -53,7 +53,7 @@ async function loadSearchProducts() {
     const container = document.getElementById("productsContainer");
     if (!container) return;
 
-    // Ø­Ø§Ù„Ø© Ø§Ù„Ø¨Ø­Ø« Ø§Ù„ÙØ§Ø±Øº
+    // حالة البحث الفارغ
     if (searchQuery === "") {
         container.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #666;">
@@ -63,7 +63,7 @@ async function loadSearchProducts() {
         return;
     }
 
-    // Ø¥Ø¸Ù‡Ø§Ø± Ù…Ø¤Ø´Ø± Ø§Ù„ØªØ­Ù…ÙŠÙ„
+    // إظهار مؤشر التحميل
     const spinnerDiv = document.createElement('div');
     spinnerDiv.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 60px;';
     spinnerDiv.innerHTML = `
@@ -83,27 +83,27 @@ async function loadSearchProducts() {
 
     try {
         const response = await fetch(CONFIG.CSV_URL);
-        if (!response.ok) throw new Error('Impossible de charger les donnÃ©es.');
+        if (!response.ok) throw new Error('Impossible de charger les données.');
         
         const csvText = await response.text();
         const rows = parseCSV(csvText);
 
-        // Ø¯Ø§Ù„Ø© ØªÙ†Ø¸ÙŠÙ Ø§Ù„Ù†Øµ
+        // دالة تنظيف النص
         const clean = (val) => val ? val.replace(/^"|"$/g, "").trim() : "";
         
-        // Ø¯Ø§Ù„Ø© ØªØ·Ø¨ÙŠØ¹ Ø§Ù„Ù†Øµ Ù„Ù„Ø¨Ø­Ø« (Ø¥Ø²Ø§Ù„Ø© Ø§Ù„ØªØ´ÙƒÙŠÙ„ ÙˆØªØ­ÙˆÙŠÙ„Ù‡ Ù„ØµÙŠØºØ© Ù…ÙˆØ­Ø¯Ø©)
+        // دالة تطبيع النص للبحث (إزالة التشكيل وتحويله لصيغة موحدة)
         const normalizeText = (text) => {
             if (!text) return '';
             return text
                 .toLowerCase()
                 .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "") // Ø¥Ø²Ø§Ù„Ø© Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„ØªØ´ÙƒÙŠÙ„
-                .replace(/[^\w\s]/g, ' '); // Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ø±Ù…ÙˆØ² Ø§Ù„Ø®Ø§ØµØ©
+                .replace(/[\u0300-\u036f]/g, "") // إزالة علامات التشكيل
+                .replace(/[^\w\s]/g, ' '); // إزالة الرموز الخاصة
         };
 
         const searchWords = normalizeText(searchQuery).split(/\s+/).filter(word => word.length > 1);
         
-        // Ù…ØµÙÙˆÙØ© Ù„ØªØ®Ø²ÙŠÙ† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù†ØªØ§Ø¦Ø¬
+        // مصفوفة لتخزين جميع النتائج
         const allResults = [];
 
         for (let i = 1; i < rows.length; i++) {
@@ -119,37 +119,32 @@ async function loadSearchProducts() {
             
             const pCat = clean(cols[CONFIG.COLUMNS.CATEGORY]);
             const pSubCat = clean(cols[CONFIG.COLUMNS.SUBCATEGORY]);
-            const pBrand = clean(cols[CONFIG.COLUMNS.BRAND]); // âœ… Ø§Ù„Ù…Ø§Ø±ÙƒØ©
+            const pBrand = clean(cols[CONFIG.COLUMNS.BRAND]); // ✅ الماركة
             const pDescription = clean(cols[CONFIG.COLUMNS.DESCRIPTION]);
             const pImg = clean(cols[CONFIG.COLUMNS.IMAGE]);
             const pPromo = clean(cols[CONFIG.COLUMNS.PROMO]);
 
-            // âœ… ØªØ·Ø¨ÙŠØ¹ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù†ØµÙˆØµ Ù„Ù„Ø¨Ø­Ø«
+            // ✅ تطبيع جميع النصوص للبحث
             const normalizedName = normalizeText(pName);
             const normalizedCat = normalizeText(pCat);
             const normalizedSubCat = normalizeText(pSubCat);
             const normalizedBrand = normalizeText(pBrand);
             const normalizedDesc = normalizeText(pDescription);
 
-            // âœ… Ø§Ù„Ø¨Ø­Ø« ÙÙŠ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ„ Ø¨Ù…Ø§ ÙÙŠ Ø°Ù„Ùƒ Ø§Ù„Ù…Ø§Ø±ÙƒØ©
-            let isMatch = false;
-            
+            // ✅ البحث في جميع الحقول بما في ذلك الماركة
+            // يجب أن تحتوي النتيجة على كل كلمات البحث (وليس كلمة واحدة فقط)
+            let isMatch = searchWords.length > 0;
+
             for (const word of searchWords) {
-                // Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† ÙˆØ¬ÙˆØ¯ ÙƒÙ„Ù…Ø© Ø§Ù„Ø¨Ø­Ø« ÙÙŠ Ø£ÙŠ Ù…Ù† Ø§Ù„Ø­Ù‚ÙˆÙ„
-                if (normalizedName.includes(word) ||
+                const found =
+                    normalizedName.includes(word) ||
                     normalizedCat.includes(word) ||
                     normalizedSubCat.includes(word) ||
-                    normalizedBrand.includes(word) ||  // âœ… Ø§Ù„Ø£Ù‡Ù…: Ø§Ù„Ø¨Ø­Ø« ÙÙŠ Ø§Ù„Ù…Ø§Ø±ÙƒØ©
-                    normalizedDesc.includes(word)) {
-                    isMatch = true;
-                    break;
-                }
-                
-                // âœ… Ø¨Ø­Ø« Ø¥Ø¶Ø§ÙÙŠ: Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† ØªØ·Ø§Ø¨Ù‚ Ø§Ù„Ù…Ø§Ø±ÙƒØ© Ø¨Ø§Ù„ÙƒØ§Ù…Ù„
-                if (normalizedBrand === word) {
-                    isMatch = true;
-                    break;
-                }
+                    normalizedBrand.includes(word) ||  // ✅ الأهم: البحث في الماركة
+                    normalizedDesc.includes(word) ||
+                    normalizedBrand === word;          // ✅ تطابق الماركة بالكامل
+
+                if (!found) { isMatch = false; break; }
             }
 
             if (isMatch) {
@@ -165,7 +160,7 @@ async function loadSearchProducts() {
             }
         }
 
-        // Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ù€ spinner
+        // إزالة الـ spinner
         if (spinnerDiv.parentNode === container) {
             container.removeChild(spinnerDiv);
         }
@@ -174,13 +169,13 @@ async function loadSearchProducts() {
             container.innerHTML = `
                 <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
                     <i class="fas fa-box-open" style="font-size: 48px; opacity: 0.5; margin-bottom: 15px; color: #999;"></i>
-                    <p style="font-size: 18px; color: #666; margin-bottom: 10px;">Aucun rÃ©sultat pour "${searchQuery}"</p>
-                    <p style="color: #999; font-size: 14px;">Essayez dâ€™autres mots-clÃ©s, comme le nom du produit ou la marque.</p>
+                    <p style="font-size: 18px; color: #666; margin-bottom: 10px;">Aucun résultat pour "${searchQuery}"</p>
+                    <p style="color: #999; font-size: 14px;">Essayez d’autres mots-clés, comme le nom du produit ou la marque.</p>
                 </div>`;
             return;
         }
 
-        // Ø­Ø³Ø§Ø¨ Ø§Ù„ØµÙØ­Ø§Øª
+        // حساب الصفحات
         const totalProducts = allResults.length;
         const totalPages = Math.ceil(totalProducts / CONFIG.PRODUCTS_PER_PAGE);
         const startIndex = (currentPage - 1) * CONFIG.PRODUCTS_PER_PAGE;
@@ -195,17 +190,17 @@ async function loadSearchProducts() {
 
         const pageResults = allResults.slice(startIndex, endIndex);
 
-        // Ø¹Ø±Ø¶ Ø§Ù„Ù†ØªØ§Ø¦Ø¬
+        // عرض النتائج
         const resultsContainer = document.createElement('div');
         resultsContainer.style.display = 'contents';
 
-        // Ø¥Ø¶Ø§ÙØ© Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ù†ØªØ§Ø¦Ø¬
+        // إضافة عداد النتائج
         const infoDiv = document.createElement('div');
         infoDiv.style.cssText = 'grid-column: 1/-1; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;';
         infoDiv.innerHTML = `
             <div style="color: #666; font-size: 14px;">
                 <i class="fas fa-box" style="margin-left: 5px;"></i>
-               Total des rÃ©sultats: ${totalProducts} produit
+               Total des résultats: ${totalProducts} produit
                 ${totalPages > 1 ? `(Page ${currentPage} sur ${totalPages})` : ''}
             </div>
             <div style="color: #666; font-size: 14px;">
@@ -214,7 +209,7 @@ async function loadSearchProducts() {
         `;
         container.appendChild(infoDiv);
 
-        // Ø¥Ø¶Ø§ÙØ© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
+        // إضافة المنتجات
         pageResults.forEach(product => {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = createProductCard(product);
@@ -223,7 +218,7 @@ async function loadSearchProducts() {
         
         container.appendChild(resultsContainer);
 
-        // Ø¥Ø¶Ø§ÙØ© Ø£Ø²Ø±Ø§Ø± Ø§Ù„ØªÙ†Ù‚Ù„
+        // إضافة أزرار التنقل
         if (totalPages > 1) {
             const paginationDiv = document.createElement('div');
             paginationDiv.className = 'pagination';
@@ -240,7 +235,7 @@ async function loadSearchProducts() {
             };
 
             if (currentPage > 1) {
-                paginationDiv.innerHTML += createPageLink(currentPage - 1, 'â†');
+                paginationDiv.innerHTML += createPageLink(currentPage - 1, '←');
             }
 
             const maxVisiblePages = 5;
@@ -270,14 +265,14 @@ async function loadSearchProducts() {
             }
 
             if (currentPage < totalPages) {
-                paginationDiv.innerHTML += createPageLink(currentPage + 1, 'â†’');
+                paginationDiv.innerHTML += createPageLink(currentPage + 1, '→');
             }
 
             container.appendChild(paginationDiv);
         }
 
     } catch (error) {
-        console.error("Ø®Ø·Ø£ ÙÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª:", error);
+        console.error("خطأ في تحميل المنتجات:", error);
         
         if (spinnerDiv.parentNode === container) {
             container.removeChild(spinnerDiv);
@@ -286,10 +281,10 @@ async function loadSearchProducts() {
         container.innerHTML = `
             <div class="error-message">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Ø¹Ø°Ø±Ø§Ù‹ØŒ Ø­Ø¯Ø« Ø®Ø·Ø£ ÙÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª</p>
+                <p>عذراً، حدث خطأ في تحميل المنتجات</p>
                 <button onclick="loadSearchProducts()" class="retry-button">
                     <i class="fas fa-redo"></i>
-                    Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©
+                    إعادة المحاولة
                 </button>
             </div>`;
     }
@@ -324,15 +319,15 @@ function createProductCard(product) {
                 ${promoBadge(product.pPromo)}
             </div> 
             <div class="product-info">
-                <p class="p-category">${product.pSubCat || product.pCat || 'Ù…Ù†ØªØ¬'}</p> 
+                <p class="p-category">${product.pSubCat || product.pCat || 'منتج'}</p> 
                 <h3 class="p-title">${product.pName}</h3>
                 ${product.pBrand ? `<p class="p-brand">${product.pBrand}</p>` : ''}
                 ${shortDescription ? `<p class="p-description">${shortDescription}</p>` : ''}
                 <div class="product-action">
                     <a href="/product.html?name=${encodeURIComponent(product.pName)}" 
                        class="btn-explore" 
-                       title="Voir les dÃ©tails">
-                        DÃ©couvrir
+                       title="Voir les détails">
+                        Découvrir
                     </a>
                     <button onclick="commandeProduit('${product.pName.replace(/'/g, "\\'")}')" 
                             class="btn-whatsapp-small"
@@ -347,7 +342,7 @@ function createProductCard(product) {
 
 function commandeProduit(productName) {
     const phoneNumber = "+212667361575"; 
-    const message = `Ø³Ù„Ø§Ù…ØŒ Ø£Ø±ÙŠØ¯ Ø·Ù„Ø¨ Ø§Ù„Ù…Ù†ØªØ¬: ${productName}`;
+    const message = `سلام، أريد طلب المنتج: ${productName}`;
     const url = `https://wa.me/${phoneNumber.replace(/\D/g,'')}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
 }

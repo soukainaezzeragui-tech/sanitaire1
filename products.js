@@ -42,6 +42,9 @@ function getCategoryFromPath() {
 
   const slug = parts[parts.length - 1].toLowerCase();
 
+  // صفحة ملف (products.html) ليست قسمًا: لا نطبّق أي فلترة
+  if (slug.includes(".")) return null;
+
   // تحويل slug إلى cat الحقيقي إن وجد في الخريطة
   return CATEGORY_MAP[slug] || slug;
 }

@@ -4,7 +4,7 @@
 if (!document.querySelector('link[href*="products.css"]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/products.css'; // التأكد من المسار المطلق
+    link.href = '/products.css?v=20261103b'; // التأكد من المسار المطلق
     document.head.appendChild(link);
 }
 
